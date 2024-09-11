@@ -27,17 +27,20 @@ jobs:
         script: |
           # Navigate to the project directory
           cd /var/www/management-app
-          
-          # Step 1: Pull the latest changes from the master branch
+
+          # Step 1: Stash any local changes
+          sudo git stash --include-untracked
+
+          # Step 2: Pull the latest changes from the master branch
           sudo git pull https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/management-app.git master
 
-          # Step 2: Install dependencies and build the project
+          # Step 3: Install dependencies and build the project
           sudo npm install
           sudo npm run build --configuration=production
 
-          # Step 3: Set ownership and permissions
+          # Step 4: Set ownership and permissions
           sudo chown -R ubuntu:www-data /var/www/management-app
           sudo chmod -R 775 /var/www/management-app
 
-          # Step 4: Restart Nginx to serve the updated front-end
+          # Step 5: Restart Nginx to serve the updated front-end
           sudo systemctl restart nginx
