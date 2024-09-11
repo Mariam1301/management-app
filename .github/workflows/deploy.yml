@@ -3,7 +3,7 @@ name: Angular CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to the main branch
+      - master  # Trigger workflow on push to the master branch
 
 jobs:
   deploy:
@@ -38,8 +38,8 @@ jobs:
           # Navigate to the project directory
           cd /var/www/management-app
           
-          # Step 1: Pull the latest changes from the main branch
-          sudo git pull https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/management-app.git main
+          # Step 1: Pull the latest changes from the master branch
+          sudo git pull https://x-access-token:${{ secrets.TOKEN_GITHUB }}@github.com/blackfrankwhite/management-app.git master
 
           # Step 2: Install dependencies and build the project
           sudo npm install
