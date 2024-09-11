@@ -18,16 +18,6 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install Dependencies
-      run: |
-        cd /var/www/management-app
-        npm install
-
-    - name: Build Angular App
-      run: |
-        cd /var/www/management-app
-        npm run build --configuration=production
-
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@master
       with:
