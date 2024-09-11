@@ -36,7 +36,7 @@ jobs:
           sudo npm run build --configuration=production
 
           # Step 3: Set ownership and permissions
-          sudo chown -R www-data:www-data /var/www/management-app
+          sudo chown -R ubuntu:www-data /var/www/management-app
           sudo chmod -R 775 /var/www/management-app
 
           # Step 4: Restart Nginx to serve the updated front-end
