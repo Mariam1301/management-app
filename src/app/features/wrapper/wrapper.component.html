@@ -1,0 +1,15 @@
+<ui-header (menuClicked)="toggleIsMenuOpen()"></ui-header>
+<div class="w-full flex flex-1 h-full">
+  <div class="w-1/6 sm:block hidden">
+    <ui-navigation [navigation]="navigationArray"></ui-navigation>
+  </div>
+  <div class="w-full p-20">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<p-sidebar [(visible)]="isMenuOpen">
+  <ui-navigation
+    [navigation]="navigationArray"
+    (navigationClicked)="isMenuOpen = false"
+  ></ui-navigation>
+</p-sidebar>

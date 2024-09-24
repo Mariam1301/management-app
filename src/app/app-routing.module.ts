@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DashboardComponent },
   {
-    path: 'feature1',
+    path: '',
     loadChildren: () =>
-      import('../app/features/feature1/feature1.module').then(
-        (m) => m.Feature1Module
-      ),
+      import('./features/wrapper/wrapper.module').then((m) => m.WrapperModule),
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./features/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

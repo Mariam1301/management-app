@@ -4,9 +4,9 @@ import {
   toggleDisable,
   writeText,
 } from './store/counter/counter.action';
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CounterModel } from './store/counter/counter.model';
 
 @Component({

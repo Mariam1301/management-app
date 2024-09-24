@@ -6,13 +6,13 @@ import feather from 'feather-icons';
   template: `<i></i>`,
   standalone: true,
 })
-export class IconComponent implements OnChanges, OnInit {
+export class UiIconComponent implements OnChanges, OnInit {
   @Input() name: string = '';
   @Input() size: number = 24;
   @Input() color: string = 'currentColor';
   @Input() strokeWidth: number = 2;
 
-  constructor(private el: ElementRef, ) {}
+  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
     this.renderIcon();

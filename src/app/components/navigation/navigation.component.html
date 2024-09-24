@@ -1,0 +1,19 @@
+<div class="w-full h-full flex flex-col justify-start p-0 sm:p-4 space-y-3">
+  @for(navigationItem of navigation; track navigationItem.title){
+  <button
+    (click)="navigationClicked.emit()"
+    class="text-left flex group items-center gap-x-2 text-primeng-surface-700 hover:text-primeng-surface-900 font-primeng font-medium px-2 py-1 rounded-primeng transition-all duration-300"
+    [routerLink]="['/', navigationItem.path]"
+    [routerLinkActive]="['text-primeng-surface-900']"
+  >
+    @if(navigationItem.icon){
+    <div
+      class="p-1 group-hover:shadow-sm group-hover:bg-primeng-surface-0 border border-primeng-surface-border rounded-primeng transition-all duration-200"
+    >
+      <ui-icon [size]="12" [name]="navigationItem.icon"></ui-icon>
+    </div>
+    }
+    {{ navigationItem.title }}
+  </button>
+  }
+</div>
