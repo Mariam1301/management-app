@@ -1,31 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './store/counter/counter.reducer';
 import { ButtonModule } from 'primeng/button';
 import { DashboardModule } from './features/dashboard/dashboard.module';
-import { RouterModule } from '@angular/router';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { IconComponent } from './components/icon/icon.component';
+import { UiIconComponent } from './components/icon/icon.component';
 import { LoaderDirective } from './components/loader/loader.directive';
+import { WrapperModule } from './features/wrapper/wrapper.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginModule } from './features/login/login.module';
+import { AppRoutingModule } from './app-routing.module';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AppRoutingModule,
+    LoginModule,
+    WrapperModule,
     LoaderDirective,
-    IconComponent,
+    UiIconComponent,
     ProgressSpinnerModule,
     BrowserModule,
-    AppRoutingModule,
     ButtonModule,
     StoreModule.forRoot({ count: counterReducer }, {}),
     DashboardModule,
-    RouterModule,
+    BrowserAnimationsModule,
+    OAuthModule.forRoot(),
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
