@@ -6,7 +6,9 @@ import {
   HttpRequestOptions,
   ParamsType,
 } from './base-http.model';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
+
+const BASE_URL = 'http://backend.devgkh.com/api/';
 
 @Injectable({
   providedIn: 'root',
@@ -17,38 +19,66 @@ export class BaseHttpService implements BaseHttpActions {
     private readonly _toastService: MessageService
   ) {}
 
-  Get(url: string, params?: ParamsType, options?: HttpRequestOptions) {
+  get<T>(url: string, params?: ParamsType, options?: HttpRequestOptions) {
     return this.httpClient
-      .get(url, { params: this.createParams(params) })
-      .pipe(tap((x) => this.HandleResponse(x)));
+      .get<T>(`${BASE_URL}${url}`, { params: this.createParams(params) })
+      .pipe(
+        tap((x) => this.HandleResponse(x)),
+        catchError((er) => {
+          this.handleErrorResponse(er);
+          throw er;
+        })
+      );
   }
 
-  Post(
+  post<TResponse, TData>(
     url: string,
-    data: any,
+    data: TData,
     params?: ParamsType,
     options?: HttpRequestOptions
   ) {
     return this.httpClient
-      .post(url, data, { params: this.createParams(params) })
-      .pipe(tap((x) => this.HandleResponse(x)));
+      .post<TResponse>(`${BASE_URL}${url}`, data, {
+        params: this.createParams(params),
+      })
+      .pipe(
+        tap((x) => this.HandleResponse(x)),
+        catchError((er) => {
+          this.handleErrorResponse(er);
+          throw er;
+        })
+      );
   }
 
-  Delete(url: string, params?: ParamsType, options?: HttpRequestOptions) {
+  delete<T>(url: string, params?: ParamsType, options?: HttpRequestOptions) {
     return this.httpClient
-      .delete(url, { params: this.createParams(params) })
-      .pipe(tap((x) => this.HandleResponse(x)));
+      .delete<T>(`${BASE_URL}${url}`, { params: this.createParams(params) })
+      .pipe(
+        tap((x) => this.HandleResponse(x)),
+        catchError((er) => {
+          this.handleErrorResponse(er);
+          throw er;
+        })
+      );
   }
 
-  Put(
+  put<TResponse, TData>(
     url: string,
-    data: any,
+    data: TData,
     params?: ParamsType,
     options?: HttpRequestOptions
   ) {
     return this.httpClient
-      .put(url, data, { params: this.createParams(params) })
-      .pipe(tap((x) => this.HandleResponse(x)));
+      .put<TResponse>(`${BASE_URL}${url}`, data, {
+        params: this.createParams(params),
+      })
+      .pipe(
+        tap((x) => this.HandleResponse(x)),
+        catchError((er) => {
+          this.handleErrorResponse(er);
+          throw er;
+        })
+      );
   }
 
   private createParams(params?: ParamsType) {
@@ -63,11 +93,22 @@ export class BaseHttpService implements BaseHttpActions {
 
   private HandleResponse(response: any) {
     if (response.Status === 500) {
-      this.handleErrorResponse('500 სერვერის პრობლემა');
+      this.handleErrorToast('500 სერვერის პრობლემა');
     }
   }
 
-  private handleErrorResponse(errorMessage: string) {
+  private handleErrorResponse(error: any) {
+    const errorSummary = `${error?.status} ${error?.statusText}`;
+    const errorText = error?.error?.message;
+
+    this._toastService.add({
+      severity: 'error',
+      summary: errorSummary,
+      detail: errorText,
+    });
+  }
+
+  private handleErrorToast(errorMessage: string) {
     this._toastService.add({
       severity: 'error',
       summary: 'მოხდა შეცდომა',

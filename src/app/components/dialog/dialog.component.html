@@ -1,0 +1,11 @@
+<p-dialog
+  [header]="header"
+  [visible]="visible"
+  (visibleChange)="handleVisibleChange($event)"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [position]="position"
+>
+  <ng-content></ng-content>
+</p-dialog>

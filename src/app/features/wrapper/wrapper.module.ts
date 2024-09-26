@@ -7,10 +7,12 @@ import { RouterModule } from '@angular/router';
 import { WrapperRoutingModule } from './wrapper-routing.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { UiIconComponent } from '../../components/icon/icon.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [WrapperComponent],
   imports: [
+    ToastModule,
     UiIconComponent,
     WrapperRoutingModule,
     CommonModule,

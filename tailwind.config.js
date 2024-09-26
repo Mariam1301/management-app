@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         primeng: "var(--font-family)",
+        arialGeo: ["arialGeo", "sans-serif"],
       },
       colors: {
         "primeng-text": "var(--text-color)",

@@ -8,29 +8,29 @@ export type HttpRequestOptions = {
 };
 
 export interface BaseHttpActions {
-  Get(
+  get<T>(
     url: string,
     params?: ParamsType,
     options?: HttpRequestOptions
-  ): Observable<any>;
+  ): Observable<T>;
 
-  Post(
+  post<T>(
     url: string,
     data: any,
     params?: ParamsType,
     options?: HttpRequestOptions
-  ): Observable<any>;
+  ): Observable<T>;
 
-  Delete(
+  delete<T>(
     url: string,
     params?: ParamsType,
     options?: HttpRequestOptions
-  ): Observable<any>;
+  ): Observable<T>;
 
-  Put(
+  put<T>(
     url: string,
     data: any,
     params?: ParamsType,
     options?: HttpRequestOptions
-  ): Observable<any>;
+  ): Observable<T>;
 }

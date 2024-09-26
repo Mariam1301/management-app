@@ -9,7 +9,7 @@ import feather from 'feather-icons';
 export class UiIconComponent implements OnChanges, OnInit {
   @Input() name: string = '';
   @Input() size: number = 24;
-  @Input() color: string = 'currentColor';
+  @Input() color: string = 'var(--text-color)';
   @Input() strokeWidth: number = 2;
 
   constructor(private el: ElementRef) {}

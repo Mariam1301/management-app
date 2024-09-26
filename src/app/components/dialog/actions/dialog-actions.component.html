@@ -1,0 +1,10 @@
+<div class="w-full flex justify-end">
+  <button
+    [disabled]="disabled"
+    class="p-button w-1/2 justify-center"
+    [ngClass]="{ 'p-disabled': disabled }"
+    (click)="saveClicked.emit()"
+  >
+    შენახვა
+  </button>
+</div>

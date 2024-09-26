@@ -13,7 +13,7 @@ import { LoaderService } from '../../services/loader/loader.service';
   selector: '[uiLoader]',
   standalone: true,
 })
-export class LoaderDirective implements OnDestroy, OnInit {
+export class UiLoaderDirective implements OnDestroy, OnInit {
   @Input()
   uiLoader!: string;
 

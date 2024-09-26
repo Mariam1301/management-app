@@ -10,16 +10,18 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       {
-        path: 'ingredient',
+        path: 'ingredients',
         loadChildren: () =>
-          import('../ingredient/ingredient.module').then(
-            (m) => m.IngredientModule
+          import('../ingredients/ingredients-page.module').then(
+            (m) => m.IngredientsPageModule
           ),
       },
       {
-        path: 'meal',
+        path: 'dishes',
         loadChildren: () =>
-          import('../meal/meal.module').then((m) => m.MealModule),
+          import('../dishes/dishes-page.module').then(
+            (m) => m.DishesPageModule
+          ),
       },
       {
         path: 'sales',
