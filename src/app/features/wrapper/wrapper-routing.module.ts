@@ -25,9 +25,16 @@ const routes: Routes = [
       },
       {
         path: 'sales',
+
         loadChildren: () =>
-          import('../sales/sales.module').then((m) => m.SalesModule),
+          import('../sales/sales-page.module').then((m) => m.SalesPageModule),
       },
+      {
+        path: 'not-found',
+        loadChildren: () =>
+          import('../not-found/not-found.module').then((m) => m.NotFoundModule),
+      },
+      { path: '**', redirectTo: '/ingredients', pathMatch: 'full' },
     ],
   },
 ];

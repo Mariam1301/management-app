@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'ui-dialog',

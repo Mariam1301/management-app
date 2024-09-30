@@ -8,6 +8,12 @@ export class UiDialogActions {
   @Input()
   disabled!: boolean | null;
 
+  @Input()
+  showCancel = false;
+
   @Output()
   saveClicked = new EventEmitter();
+
+  @Output()
+  cancelClicked = new EventEmitter();
 }

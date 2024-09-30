@@ -1,0 +1,43 @@
+<div class="p-5">
+  <ui-responsive-data-view
+    title="გაყიდვები"
+    [data]="sales"
+    [showAddButton]="true"
+    [showDeleteButton]="true"
+    (addButtonClicked)="onAddClick()"
+    (deleteClicked)="onDeleteClick($event)"
+    (rowClicked)="onRowClick($event)"
+  >
+    <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
+    <ui-data-element name="თარიღი">
+      <ng-template uiTemplate let-sale>
+        <p class="truncate">
+          {{ sale.date | date : "dd/MM/yy" }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="შექმნის თარიღი">
+      <ng-template uiTemplate let-sale>
+        <p class="truncate">
+          {{ sale.created_at | date : "dd/MM/yy mm:ss" }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="ბოლო განახლება">
+      <ng-template uiTemplate let-sale>
+        <p class="truncate">
+          {{ sale.updated_at | date : "dd/MM/yy mm:ss" }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+  </ui-responsive-data-view>
+</div>
+
+@if(isDialogVisible){
+<ui-dialog [(visible)]="isDialogVisible" header="გაყიდვა">
+  <sale-basic-form
+    [sale]="selectedSale"
+    (saveClicked)="onSaveClick($event)"
+  ></sale-basic-form>
+</ui-dialog>
+}

@@ -1,26 +1,27 @@
-<ui-responsive-data-view
-  title="ინგრედიენტები"
-  [data]="ingredients"
-  [showAddButton]="true"
-  [showDeleteButton]="true"
-  (addButtonClicked)="onAddClick()"
-  (deleteClicked)="onDeleteClick($event)"
-  (rowClicked)="onRowClick($event)"
->
-  <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
-  <ui-data-element name="რაოდენობა">
-    <ng-template uiTemplate let-ingredient>
-      <p class="truncate">
-        {{
-          ingredient.measurement_amount +
-            " " +
-            (ingredient.measurement_type | measurementType)
-        }}
-      </p>
-    </ng-template>
-  </ui-data-element>
-</ui-responsive-data-view>
-
+<div class="p-5">
+  <ui-responsive-data-view
+    title="ინგრედიენტები"
+    [data]="ingredients"
+    [showAddButton]="true"
+    [showDeleteButton]="true"
+    (addButtonClicked)="onAddClick()"
+    (deleteClicked)="onDeleteClick($event)"
+    (rowClicked)="onRowClick($event)"
+  >
+    <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
+    <ui-data-element name="რაოდენობა">
+      <ng-template uiTemplate let-ingredient>
+        <p class="truncate">
+          {{
+            ingredient.measurement_amount +
+              " " +
+              (ingredient.measurement_type | measurementType)
+          }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+  </ui-responsive-data-view>
+</div>
 @if(isIngredientDialogVisible){
 <ui-dialog [(visible)]="isIngredientDialogVisible" header="ინგრედიენტი">
   <ingredient-dialog

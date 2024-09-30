@@ -3,15 +3,15 @@
 } @if(showAddButton){
 <div class="flex w-full justify-end mb-5">
   <button
-    class="p-button flex gap-2 items-center"
+    class="p-button w-full sm:w-fit justify-center flex gap-2 items-center"
     (click)="addButtonClicked.emit()"
   >
     <ui-icon name="plus" [size]="18" color="pointer"></ui-icon>
     <p class="font-primeng">დამატება</p>
   </button>
 </div>
-}
-<div class="hidden sm:block">
+} @if((data?.length||0)>0){
+<div class="hidden sm:block border border-primeng-surface-200">
   <p-table
     [paginator]="(data?.length || 0) > 10"
     [value]="data || []"
@@ -49,7 +49,7 @@
         </td>
         } @if(showDeleteButton){
         <td>
-          <button (click)="onDeleteClick($event, row)">
+          <button (click)="onDeleteClick($event, row)" class="p-2">
             <ui-icon name="trash" [size]="16"></ui-icon>
           </button>
         </td>
@@ -62,22 +62,14 @@
 <div class="sm:hidden">
   @for( dataItem of data; track dataItem[trackPropertyName]){
   <button
-    class="w-full min-h-32 bg-primeng-surface-0 max-w-full rounded-md p-4 my-3"
+    class="w-full pt-4 border border-primeng-surface-200 bg-primeng-surface-0 max-w-full rounded-md my-3"
     (click)="rowClicked.emit(dataItem)"
   >
-    <div class="mb-5">
-      <p-button severity="secondary" (click)="onDeleteClick($event, dataItem)">
-        <ui-icon name="trash" color="pointer" [size]="16"></ui-icon
-      ></p-button>
-    </div>
-
     @for(column of columnList; track column.name){
-    <div
-      class="flex mb-5 items-center justify-between truncate border-primeng-surface-border border-b"
-    >
-      <div class="flex items-center gap-2 my-2 truncate">
-        <p class="font-bold font-primeng">{{ column.name }}:</p>
-        <p class="truncate font-primeng">
+    <div class="flex items-center justify-between truncate">
+      <div class="flex items-center gap-2 my-1 px-4 truncate">
+        <p class="font-bold font-primeng text-sm">{{ column.name }}:</p>
+        <p class="truncate font-primeng text-sm">
           @if(column.templateRef ){
 
           <ng-container
@@ -96,6 +88,17 @@
       </div>
     </div>
 
-    }</button
+    }
+    <button
+      (click)="onDeleteClick($event, dataItem)"
+      class="py-4 mt-4 border-t w-full flex items-center justify-center border-dashed"
+    >
+      <ui-icon name="trash" color="pointer" [size]="16"></ui-icon>
+    </button></button
   >}
 </div>
+}@else {
+<p class="w-full text-center font-primeng py-5 text-primeng-surface-400">
+  ჩანაწერი არ არის
+</p>
+}

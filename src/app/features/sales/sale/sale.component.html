@@ -1,0 +1,32 @@
+<form #form="ngForm" class="flex flex-col pb-5 max-w-screen sm:min-w-96">
+  <div class="flex flex-col pb-5">
+    <label for="title" class="pb-1 font-primeng">დასახელება</label>
+    <input
+      required
+      pInputText
+      name="title"
+      id="title"
+      type="text"
+      class="w-full"
+      aria-describedby="title-help"
+      [(ngModel)]="sale.title"
+    />
+  </div>
+  <label for="quantity" class="pb-1 font-primeng">თარიღი</label>
+  <p-calendar
+    required
+    name="date"
+    appendTo="body"
+    dateFormat="yy-mm-dd"
+    hourFormat="24"
+    class="mb-5"
+    [(ngModel)]="sale.date"
+  />
+
+  <ui-dialog-actions
+    [disabled]="form.invalid"
+    [showCancel]="!isDialog"
+    (saveClicked)="onSaveClick()"
+    (cancelClicked)="canceledClicked.emit()"
+  ></ui-dialog-actions>
+</form>
