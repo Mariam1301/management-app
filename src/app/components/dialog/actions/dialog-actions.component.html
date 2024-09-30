@@ -1,10 +1,11 @@
 <div class="w-full flex justify-end gap-x-5">
+  @if(showCancel){
   <button
     class="p-ripple flex justify-center items-center sm:w-fit w-full font-primeng p-element p-button p-component p-button-secondary p-button-text"
     (click)="cancelClicked.emit()"
   >
-    გაუქმება
-  </button>
+    გაუქმება</button
+  >}
   <button
     [disabled]="disabled"
     class="p-button sm:w-fit w-full justify-center font-primeng"
