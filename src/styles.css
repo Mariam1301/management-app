@@ -33,6 +33,11 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.p-calendar,
+.p-dropdown {
+  @apply w-full;
+}
+
 .p-dialog-content {
   @apply sm:p-5 p-2 pb-10 sm:pb-5;
 }

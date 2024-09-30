@@ -21,7 +21,7 @@
       id="title"
       type="number"
       aria-describedby="title-help"
-      class="sm:w-40 w-full"
+      class="w-full"
       [(ngModel)]="ingredient.measurement_amount"
     />
     <p-dropdown
@@ -31,7 +31,7 @@
       optionLabel="name"
       optionValue="id"
       placeholder="აირჩიე ტიპი"
-      class="sm:w-40 w-full"
+      class="w-full"
       [options]="measurementTypeOptions"
       [(ngModel)]="ingredient.measurement_type"
     />

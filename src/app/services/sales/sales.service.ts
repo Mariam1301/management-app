@@ -11,7 +11,9 @@ export class SalesService {
   constructor(private readonly _baseHttpService: BaseHttpService) {}
 
   getAllSales() {
-    return this._baseHttpService.get<Sale[]>(`${this.entityName}`);
+    return this._baseHttpService.get<Sale[]>(`${this.entityName}`, undefined, {
+      loaderId: 'sales',
+    });
   }
 
   getSaleById(id: number) {
@@ -30,7 +32,9 @@ export class SalesService {
 
   getRecords(saleId: number) {
     return this._baseHttpService.get<SaleRecord[]>(
-      `${this.entityName}/${saleId}/record`
+      `${this.entityName}/${saleId}/record`,
+      undefined,
+      { loaderId: 'records' }
     );
   }
 

@@ -6,7 +6,8 @@ import {
   HttpRequestOptions,
   ParamsType,
 } from './base-http.model';
-import { catchError, tap } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs';
+import { LoaderService } from '../loader/loader.service';
 
 const BASE_URL = 'http://backend.devgkh.com/api/';
 
@@ -16,10 +17,12 @@ const BASE_URL = 'http://backend.devgkh.com/api/';
 export class BaseHttpService implements BaseHttpActions {
   constructor(
     public httpClient: HttpClient,
-    private readonly _toastService: MessageService
+    private readonly _toastService: MessageService,
+    private readonly _loaderService: LoaderService
   ) {}
 
   get<T>(url: string, params?: ParamsType, options?: HttpRequestOptions) {
+    options?.loaderId && this._loaderService.createLoader(options.loaderId);
     return this.httpClient
       .get<T>(`${BASE_URL}${url}`, { params: this.createParams(params) })
       .pipe(
@@ -27,7 +30,12 @@ export class BaseHttpService implements BaseHttpActions {
         catchError((er) => {
           this.handleErrorResponse(er);
           throw er;
-        })
+        }),
+        finalize(
+          () =>
+            options?.loaderId &&
+            this._loaderService.removeLoader(options.loaderId)
+        )
       );
   }
 

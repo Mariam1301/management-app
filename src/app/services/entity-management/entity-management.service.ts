@@ -12,12 +12,18 @@ export class EntityManagementService {
 
   getAllIngredients() {
     return this._baseHttpService.get<Ingredient[]>(
-      `${this.entityName}/ingredients`
+      `${this.entityName}/ingredients`,
+      undefined,
+      { loaderId: 'ingredient' }
     );
   }
 
   getDishes() {
-    return this._baseHttpService.get<Dish[]>(`${this.entityName}/dishes`);
+    return this._baseHttpService.get<Dish[]>(
+      `${this.entityName}/dishes`,
+      undefined,
+      { loaderId: 'dishes' }
+    );
   }
 
   addEntity(data: EntityAddModel) {

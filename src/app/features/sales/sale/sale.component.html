@@ -9,6 +9,7 @@
       type="text"
       class="w-full"
       aria-describedby="title-help"
+      [ngClass]="[isDialog ? 'w-full' : 'w-1/2']"
       [(ngModel)]="sale.title"
     />
   </div>
@@ -20,6 +21,7 @@
     dateFormat="yy-mm-dd"
     hourFormat="24"
     class="mb-5"
+    [ngClass]="[isDialog ? 'w-full' : 'w-1/2']"
     [(ngModel)]="sale.date"
   />
 

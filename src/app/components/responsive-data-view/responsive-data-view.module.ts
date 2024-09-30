@@ -5,10 +5,17 @@ import { UiResponsiveDataViewComponent } from './responsive-data-view.component'
 import { UiIconComponent } from '../icon/icon.component';
 import { UiDataElement } from './data-element/data-element.component';
 import { ButtonModule } from 'primeng/button';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [UiResponsiveDataViewComponent, UiDataElement],
-  imports: [TableModule, CommonModule, UiIconComponent, ButtonModule],
+  imports: [
+    TableModule,
+    CommonModule,
+    UiIconComponent,
+    ButtonModule,
+    SkeletonModule,
+  ],
   exports: [UiResponsiveDataViewComponent, UiDataElement],
 })
 export class UiResponsiveDataViewModule {}
