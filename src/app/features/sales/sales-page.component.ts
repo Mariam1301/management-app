@@ -26,7 +26,7 @@ export class SalesPageComponent {
 
   onRowClick(sale: Sale) {
     this._router.navigate(['sales', 'details'], {
-      queryParams: { saleId: sale?.id },
+      queryParams: { id: sale?.id },
     });
   }
 

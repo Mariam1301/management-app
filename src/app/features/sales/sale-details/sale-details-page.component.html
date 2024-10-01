@@ -1,7 +1,7 @@
-<button class="flex items-center font-primeng my-5" [routerLink]="['/sales']">
-  <ui-icon name="chevron-left" [size]="18"></ui-icon>უკან
+<button class="flex items-center font-primeng sm:my-5 mt-12" routerLink="..">
+  <ui-icon name="chevron-left" [size]="18"></ui-icon>გაყიდვები
 </button>
-<div class="w-full bg-white p-5 my-5">
+<div class="w-full bg-primeng-surface-0 p-5 my-5">
   @if(editMode){
   <sale-basic-form
     [sale]="saleForm"
@@ -37,24 +37,11 @@
       (deleteClicked)="onDeleteClick($event)"
       (rowClicked)="onRowClick($event)"
     >
-      <ui-data-element
-        name="დასახელება"
-        valueField="entity_id"
-      ></ui-data-element>
+      <ui-data-element name="კერძი" valueField="entity_title"></ui-data-element>
       <ui-data-element name="რაოდენობა" valueField="amount"></ui-data-element>
-      <ui-data-element name="ფასი" valueField="price"></ui-data-element>
-      <ui-data-element name="დამატების თარიღი">
-        <ng-template uiTemplate let-sale>
-          <p class="truncate">
-            {{ sale.created_at | date : "dd/MM/yy hh:mm" }}
-          </p>
-        </ng-template>
-      </ui-data-element>
-      <ui-data-element name="ბოლო განახლება">
-        <ng-template uiTemplate let-sale>
-          <p class="truncate">
-            {{ sale.updated_at | date : "dd/MM/yy hh:mm" }}
-          </p>
+      <ui-data-element name="ფასი">
+        <ng-template uiTemplate let-record>
+          <p class="truncate">{{ record.price }}₾</p>
         </ng-template>
       </ui-data-element>
     </ui-responsive-data-view>

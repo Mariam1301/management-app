@@ -10,26 +10,26 @@
     (rowClicked)="onRowClick($event)"
   >
     <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
-    <ui-data-element name="რაოდენობა">
-      <ng-template uiTemplate let-ingredient>
+    <ui-data-element name="ერთეული">
+      <ng-template uiTemplate let-dish>
         <p class="truncate">
-          {{
-            ingredient.measurement_amount +
-              " " +
-              (ingredient.measurement_type | measurementType)
-          }}
+          {{ dish.measurement_type | measurementType }}
         </p>
       </ng-template>
     </ui-data-element>
-    <ui-data-element name="ფასი" valueField="price"></ui-data-element>
+    <ui-data-element name="ფასი">
+      <ng-template uiTemplate let-dish>
+        <p class="truncate">{{ dish.price }}₾</p>
+      </ng-template>
+    </ui-data-element>
   </ui-responsive-data-view>
 </div>
 
 @if(isDialogVisible){
 <ui-dialog [(visible)]="isDialogVisible" header="კერძი">
-  <dish-dialog
+  <dish-basic-form
     [dish]="selectedDish"
     (saveClicked)="onSaveClick($event)"
-  ></dish-dialog>
+  ></dish-basic-form>
 </ui-dialog>
 }

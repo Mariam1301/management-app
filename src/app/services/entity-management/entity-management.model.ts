@@ -1,17 +1,20 @@
-export interface Ingredient {
+export interface EntityModel {
   id: number;
   title: string;
   type: EntityTypeEnum;
   measurement_type: MeasurementTypeEnum;
   measurement_amount: number;
-}
-
-export interface Dish extends Ingredient {
-  price: number;
-}
-
-export interface EntityAddModel extends Ingredient {
   price?: number;
+}
+
+export interface IngredientRecord {
+  id: number;
+  measurement_type: MeasurementTypeEnum;
+  measurement_amount: number;
+}
+
+export interface Dish extends EntityModel {
+  ingredients?: IngredientRecord[];
 }
 
 export enum EntityTypeEnum {

@@ -4,8 +4,11 @@
 
 @import "primeng/resources/themes/aura-light-noir/theme.css";
 /* @import "primeng/resources/themes/saga-orange/theme.css"; */
+/* @import "primeng/resources/themes/bootstrap4-light-blue/theme.css"; */
 
-@import "primeng/resources/primeng.css";
+/* @import "primeng/resources/themes/lara-dark-indigo/theme.css"; */
+/* @import "primeng/resources/themes/rhea/theme.css"; */
+
 @import "./styles/fonts.css";
 
 body {
@@ -18,8 +21,8 @@ body {
   width: 50%;
   height: 50%;
 }
-tr {
-  @apply hover:bg-primeng-primary-50 cursor-pointer duration-300 transition-all;
+tr.clickable {
+  @apply hover:bg-primeng-surface-100 cursor-pointer duration-300 transition-all;
 }
 th {
   @apply cursor-default;

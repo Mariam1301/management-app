@@ -1,0 +1,79 @@
+<div class="px-4 sm:px-0">
+  <button
+    class="flex items-center font-primeng sm:my-5 mb-12 mt-5"
+    routerLink=".."
+  >
+    <ui-icon name="chevron-left" [size]="18"></ui-icon>კერძები
+  </button>
+
+  @if(editMode){
+  <div class="flex w-full sm:justify-end justify-center">
+    <ui-dialog-actions
+      [showCancel]="true"
+      (cancelClicked)="editMode = false"
+      (saveClicked)="onSaveClick()"
+      (canceledClicked)="editMode = false"
+    ></ui-dialog-actions>
+  </div>
+  }@else {
+  <div class="w-full flex justify-end">
+    <button
+      (click)="onEditSaleClick()"
+      class="py-3 px-3 p-element group space-x-2 flex items-center p-button p-component p-button-secondary"
+    >
+      <p class="w-0 group-hover:w-full group-hover:opacity-100 opacity-0">
+        ცვლილება
+      </p>
+      <ui-icon name="edit-2" [size]="18" class="text-black"></ui-icon>
+    </button>
+  </div>
+  }
+</div>
+
+<div class="w-full bg-primeng-surface-0 p-5 my-5">
+  @if(editMode){
+
+  <dish-basic-form [dish]="dishForm" [isDialog]="false"></dish-basic-form>
+  }@else{
+
+  <p class="font-primeng text-2xl font-bold mb-2">{{ dish.title }}</p>
+  <p class="font-primeng mb-12 text-sm">ფასი: {{ dish.price }}₾</p>
+
+  }
+
+  <div>
+    <ui-responsive-data-view
+      title="ინგრედიენტები"
+      [data]="dish.ingredients"
+      [showAddButton]="editMode"
+      [showDeleteButton]="editMode"
+      [clickable]="editMode"
+      [emitDeleteIndex]="true"
+      (addButtonClicked)="onAddClick()"
+      (deleteClicked)="onDeleteClick($event)"
+      (rowClicked)="onRowClick($event)"
+    >
+      <ui-data-element name="ინგრედიენტი" valueField="title"></ui-data-element>
+      <ui-data-element name="რაოდენობა">
+        <ng-template uiTemplate let-ingredient>
+          <p class="truncate">
+            {{
+              ingredient.measurement_amount +
+                " " +
+                (ingredient.measurement_type | measurementType)
+            }}
+          </p>
+        </ng-template>
+      </ui-data-element>
+    </ui-responsive-data-view>
+  </div>
+</div>
+
+@if(isDialogVisible){
+<ui-dialog [(visible)]="isDialogVisible" header="გაყიდვა">
+  <ingredient-record-dialog
+    [ingredientRecord]="selectedIngredient || {}"
+    (saveClicked)="onRecordSaveClick($event)"
+  ></ingredient-record-dialog>
+</ui-dialog>
+}

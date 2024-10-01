@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { EntityManagementService } from '../../services/entity-management/entity-management.service';
 import {
   EntityTypeEnum,
-  Ingredient,
+  EntityModel,
 } from '../../services/entity-management/entity-management.model';
 
 @Component({
   templateUrl: './ingredients-page.component.html',
 })
 export class IngredientsPageComponent implements OnInit {
-  ingredients!: Ingredient[];
+  ingredients!: EntityModel[];
 
   isIngredientDialogVisible = false;
 
-  selectedIngredient!: Partial<Ingredient>;
+  selectedIngredient!: Partial<EntityModel>;
 
   ingredientsCount = 0;
   constructor(
@@ -24,7 +24,7 @@ export class IngredientsPageComponent implements OnInit {
     this.fetchIngredients();
   }
 
-  onRowClick(ingredient: Ingredient) {
+  onRowClick(ingredient: EntityModel) {
     this.isIngredientDialogVisible = true;
     this.selectedIngredient = { ...ingredient };
   }
@@ -34,19 +34,19 @@ export class IngredientsPageComponent implements OnInit {
     this.selectedIngredient = {};
   }
 
-  onSaveClick(ingredient: Ingredient) {
-    // let stream$ = ingredient.id?this.
-    this.isIngredientDialogVisible = false;
-    !ingredient.id &&
-      this._entityManagementService
-        .addEntity({
+  onSaveClick(ingredient: EntityModel) {
+    let stream$ = ingredient.id
+      ? this._entityManagementService.updateIngredient(ingredient)
+      : this._entityManagementService.addEntity({
           ...ingredient,
           type: EntityTypeEnum.Ingredient,
-        })
-        .subscribe(() => this.fetchIngredients());
+        });
+
+    this.isIngredientDialogVisible = false;
+    stream$.subscribe(() => this.fetchIngredients());
   }
 
-  onDeleteClick(ingredient: Ingredient) {
+  onDeleteClick(ingredient: EntityModel) {
     this._entityManagementService
       .deleteEntity(ingredient.id)
       .subscribe(() => this.fetchIngredients());

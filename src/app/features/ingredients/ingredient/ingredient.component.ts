@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  Ingredient,
+  EntityModel,
   MeasurementTypes,
 } from '../../../services/entity-management/entity-management.model';
 
@@ -10,14 +10,14 @@ import {
 })
 export class IngredientComponent {
   @Input()
-  ingredient: Partial<Ingredient> = {};
+  ingredient: Partial<EntityModel> = {};
 
   @Output()
-  saveClicked = new EventEmitter<Ingredient>();
+  saveClicked = new EventEmitter<EntityModel>();
 
   measurementTypeOptions = MeasurementTypes;
 
   onSaveClick() {
-    this.saveClicked.emit(this.ingredient as Ingredient);
+    this.saveClicked.emit(this.ingredient as EntityModel);
   }
 }

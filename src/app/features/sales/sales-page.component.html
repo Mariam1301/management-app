@@ -17,20 +17,6 @@
         </p>
       </ng-template>
     </ui-data-element>
-    <ui-data-element name="შექმნის თარიღი">
-      <ng-template uiTemplate let-sale>
-        <p class="truncate">
-          {{ sale.created_at | date : "dd/MM/yy mm:ss" }}
-        </p>
-      </ng-template>
-    </ui-data-element>
-    <ui-data-element name="ბოლო განახლება">
-      <ng-template uiTemplate let-sale>
-        <p class="truncate">
-          {{ sale.updated_at | date : "dd/MM/yy mm:ss" }}
-        </p>
-      </ng-template>
-    </ui-data-element>
   </ui-responsive-data-view>
 </div>
 

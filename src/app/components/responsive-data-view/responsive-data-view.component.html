@@ -1,7 +1,7 @@
 <ng-content></ng-content> @if(title){
 <h1 class="font-primeng font-semibold text-xl mb-5">{{ title }}</h1>
 } @if(showAddButton){
-<div class="flex w-full justify-end mb-5">
+<div class="flex w-full justify-end mb-5 mt-12 sm:mt-0">
   <button
     class="p-button w-full sm:w-fit justify-center flex gap-2 items-center"
     (click)="addButtonClicked.emit()"
@@ -48,8 +48,11 @@
         }
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-row>
-      <tr class="hover:bg-primeng-surface-100" (click)="rowClicked.emit(row)">
+    <ng-template pTemplate="body" let-row let-i="rowIndex">
+      <tr
+        [ngClass]="{  clickable }"
+        (click)="clickable && rowClicked.emit(row)"
+      >
         @for(column of columnList; track column.name){
         <td>
           @if(column.templateRef ){
@@ -69,7 +72,7 @@
         </td>
         } @if(showDeleteButton){
         <td>
-          <button (click)="onDeleteClick($event, row)" class="p-2">
+          <button (click)="onDeleteClick($event, row, i)" class="p-2">
             <ui-icon name="trash" [size]="16"></ui-icon>
           </button>
         </td>
@@ -80,10 +83,10 @@
 </div>
 
 <div class="sm:hidden">
-  @for( dataItem of data; track dataItem[trackPropertyName]){
+  @for( dataItem of data;let i = $index; track i; ){
   <button
-    class="w-full pt-4 border border-primeng-surface-200 bg-primeng-surface-0 max-w-full rounded-md my-3"
-    (click)="rowClicked.emit(dataItem)"
+    class="w-full py-4 border border-primeng-surface-200 bg-primeng-surface-0 max-w-full rounded-md my-3"
+    (click)="clickable && rowClicked.emit(dataItem)"
   >
     @for(column of columnList; track column.name){
     <div class="flex items-center justify-between truncate">
@@ -108,15 +111,15 @@
       </div>
     </div>
 
-    }
+    } @if(showDeleteButton){
     <button
-      (click)="onDeleteClick($event, dataItem)"
+      (click)="onDeleteClick($event, dataItem, i)"
       label="delete"
       name="delete"
-      class="py-4 mt-4 border-t w-full flex items-center justify-center border-dashed"
+      class="pt-4 mt-4 border-t w-full flex items-center justify-center border-dashed"
     >
-      <ui-icon name="trash" color="pointer" [size]="16"></ui-icon>
-    </button></button
+      <ui-icon name="trash" color="pointer" [size]="16"></ui-icon></button
+    >}</button
   >}
 </div>
 }@else {

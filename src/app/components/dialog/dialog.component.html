@@ -5,11 +5,11 @@
   [draggable]="false"
   [resizable]="false"
   [position]="position"
-  [breakpoints]="{ '640px': '100vw' }"
+  [breakpoints]="{ '640px': '100vw',  }"
   [dismissableMask]="true"
   (visibleChange)="handleVisibleChange($event)"
 >
-  <div>
+  <div class="sm:min-w-96">
     <ng-content></ng-content>
   </div>
 </p-dialog>

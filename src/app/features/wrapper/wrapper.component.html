@@ -1,9 +1,9 @@
 <ui-header (menuClicked)="toggleIsMenuOpen()"></ui-header>
 <div class="w-full flex flex-1 h-full">
-  <div class="w-1/6 sm:block hidden">
+  <div class="w-1/6 lg:block hidden">
     <ui-navigation [navigation]="navigationArray"></ui-navigation>
   </div>
-  <div class="w-full sm:px-20">
+  <div class="w-full lg:px-20 sm:px-4">
     <router-outlet></router-outlet>
   </div>
 </div>

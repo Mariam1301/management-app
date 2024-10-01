@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Dish } from '../../../services/entity-management/entity-management.model';
+import { EntityModel } from '../../../services/entity-management/entity-management.model';
 import { SaleRecord } from '../../../services/sales/sales.model';
 import { SalesService } from '../../../services/sales/sales.service';
 import { EntityManagementService } from '../../../services/entity-management/entity-management.service';
@@ -15,7 +15,7 @@ export class RecordComponent implements OnInit {
   @Output()
   saveClicked = new EventEmitter<SaleRecord>();
 
-  entityOptions: Dish[] = [];
+  entityOptions: EntityModel[] = [];
 
   constructor(
     private readonly _salesService: SalesService,

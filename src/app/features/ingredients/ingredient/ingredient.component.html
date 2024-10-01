@@ -12,18 +12,21 @@
       [(ngModel)]="ingredient.title"
     />
   </div>
-  <label for="quantity" class="pb-1">რაოდენობა</label>
+  <label for="price" class="pb-1">ფასი</label>
   <div class="flex justify-between gap-x-4 pb-8">
     <input
       required
       pInputText
-      name="quantity"
-      id="title"
+      name="price"
+      id="price"
       type="number"
       aria-describedby="title-help"
       class="w-full"
-      [(ngModel)]="ingredient.measurement_amount"
+      [(ngModel)]="ingredient.price"
     />
+  </div>
+  <label for="type" class="pb-1">ერთეული</label>
+  <div class="flex justify-between gap-x-4 pb-8">
     <p-dropdown
       required
       name="type"

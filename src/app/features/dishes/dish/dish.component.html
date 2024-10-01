@@ -1,6 +1,6 @@
 <form #form="ngForm" class="flex flex-col pb-5 max-w-screen sm:min-w-96">
   <div class="flex flex-col pb-5">
-    <label for="title" class="pb-1">დასახელება</label>
+    <label for="title" class="pb-1 font-primeng">დასახელება</label>
     <input
       required
       pInputText
@@ -12,18 +12,8 @@
       [(ngModel)]="dish.title"
     />
   </div>
-  <label for="quantity" class="pb-1">რაოდენობა</label>
+  <label for="type" class="pb-1 font-primeng">ერთეული</label>
   <div class="flex justify-between gap-x-4 pb-5">
-    <input
-      required
-      pInputText
-      name="quantity"
-      id="title"
-      type="number"
-      aria-describedby="title-help"
-      class="w-full sm:w-2/5"
-      [(ngModel)]="dish.measurement_amount"
-    />
     <p-dropdown
       required
       name="type"
@@ -38,7 +28,7 @@
   </div>
 
   <div class="flex flex-col pb-8">
-    <label for="price" class="pb-1">ფასი</label>
+    <label for="price" class="pb-1 font-primeng">ფასი</label>
     <input
       required
       pInputText
@@ -51,8 +41,10 @@
     />
   </div>
 
+  @if(isDialog){
   <ui-dialog-actions
     [disabled]="form.invalid"
     (saveClicked)="onSaveClick()"
-  ></ui-dialog-actions>
+  ></ui-dialog-actions
+  >}
 </form>

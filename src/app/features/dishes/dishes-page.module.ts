@@ -13,12 +13,24 @@ import { UiTemplateDirective } from '../../components/template/ui-template.direc
 import { MeasurementTypePipe } from '../../pipes/measurement-type.pipe';
 import { DishComponent } from './dish/dish.component';
 import { UiDialogModule } from '../../components/dialog/dialog.module';
-import { UiLoaderDirective } from '../../components/loader/loader.directive';
+import { DishDetailsComponent } from './dish-details/dish-details.component';
+import { DishDetailsResolver } from '../../services/resolvers/dish-details-resolver.service';
+import { IngredientRecordComponent } from './ingredient-record/ingredient-record.component';
 
 @NgModule({
-  declarations: [DishesPageComponent, DishComponent],
+  declarations: [
+    DishesPageComponent,
+    DishComponent,
+    DishDetailsComponent,
+    IngredientRecordComponent,
+  ],
   imports: [
     RouterModule.forChild([
+      {
+        path: 'details',
+        resolve: { details: DishDetailsResolver },
+        component: DishDetailsComponent,
+      },
       {
         path: '',
         component: DishesPageComponent,

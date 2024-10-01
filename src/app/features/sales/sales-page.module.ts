@@ -34,7 +34,7 @@ import { SaleDetailsResolver } from '../../services/resolvers/sale-details-resol
       },
       {
         path: 'details',
-        resolve: { myData: SaleDetailsResolver },
+        resolve: { details: SaleDetailsResolver },
         component: SaleDetailsPageComponent,
       },
     ]),

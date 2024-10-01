@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { SalesService } from '../../../services/sales/sales.service';
 import { Sale, SaleRecord } from '../../../services/sales/sales.model';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   templateUrl: './sale-details-page.component.html',
@@ -21,11 +22,17 @@ export class SaleDetailsPageComponent implements OnInit {
   saleForm: Partial<Sale> = {};
   constructor(
     private readonly _salesService: SalesService,
-    private readonly _route: ActivatedRoute
+    private readonly _route: ActivatedRoute,
+    private readonly _destroyRef: DestroyRef
   ) {}
   ngOnInit(): void {
-    this.saleId = Number(this._route.snapshot?.queryParamMap?.get('saleId'));
-    this.fetchSale(this.saleId);
+    this.saleId = Number(this._route.snapshot?.queryParamMap?.get('id'));
+    this._route.data
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((data) => {
+        console.log(data);
+        this.sale = data['details'];
+      });
     this.fetchRecords();
   }
 
@@ -56,12 +63,6 @@ export class SaleDetailsPageComponent implements OnInit {
     this._salesService
       .getRecords(this.saleId as number)
       .subscribe((records) => (this.records = records));
-  }
-
-  fetchSale(saleId: number) {
-    this._salesService
-      .getSaleById(saleId)
-      .subscribe((data) => (this.sale = data));
   }
 
   onSaveClick(sale: Sale) {
