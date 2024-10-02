@@ -10,17 +10,21 @@
     (canceledClicked)="editMode = false"
   ></sale-basic-form>
   }@else{
-  <div class="w-full flex justify-end">
+  <div class="w-full flex justify-between items-center">
+    <p class="font-primeng text-primeng-surface-400">
+      თარიღი: {{ sale.date | date : "dd/MM/yy" }}
+    </p>
+
     <button (click)="onEditSaleClick()">
       <ui-icon name="edit"></ui-icon>
     </button>
   </div>
 
-  <p class="font-primeng text-2xl font-bold mb-2">{{ sale.title }}</p>
-  <p class="font-primeng text-primeng-surface-400 mb-5">
-    თარიღი: {{ sale.date | date : "dd/MM/yy" }}
+  <p class="font-primeng text-2xl font-bold mb-5 mt-8">{{ sale.title }}</p>
+  <p class="font-primeng mb-2">სულ შემოსავალი: {{ sale.total_price }}₾</p>
+  <p class="font-primeng">
+    გაყიდული პროდუქტების რაოდენობა: {{ sale.total_amount }}
   </p>
-  <p class="font-primeng">სულ შემოსავალი: 30₾</p>
   <p></p>
   }
 

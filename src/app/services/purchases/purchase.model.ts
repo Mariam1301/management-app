@@ -4,6 +4,8 @@ export interface Purchase {
   id: number;
   title: string;
   updated_at: Date | string;
+  total_amount: number;
+  total_price: number;
 }
 
 export interface PurchaseRecord {

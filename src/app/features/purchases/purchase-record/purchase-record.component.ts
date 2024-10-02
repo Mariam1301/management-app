@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EntityModel } from '../../../services/entity-management/entity-management.model';
 import { EntityManagementService } from '../../../services/entity-management/entity-management.service';
 import { PurchaseRecord } from '../../../services/purchases/purchase.model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'record-dialog',
@@ -23,6 +24,7 @@ export class PurchaseRecordComponent implements OnInit {
   ngOnInit(): void {
     this._entityManagementService
       .getAllIngredients()
+      .pipe(map((response) => response.data))
       .subscribe((data) => (this.entityOptions = data));
   }
 

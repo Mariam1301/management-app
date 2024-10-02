@@ -19,7 +19,7 @@ export class EntityManagementService {
   }
 
   getAllIngredients(pageNumber?: number, pageSize?: number) {
-    return this._baseHttpService.get<EntityModel[]>(
+    return this._baseHttpService.get<{ data: EntityModel[] }>(
       `${this.entityName}/ingredients`,
       { page: pageNumber, per_page: pageSize },
       { loaderId: 'ingredient' }
@@ -27,7 +27,7 @@ export class EntityManagementService {
   }
 
   getDishes(pageNumber?: number, pageSize?: number) {
-    return this._baseHttpService.get<EntityModel[]>(
+    return this._baseHttpService.get<{ data: EntityModel[] }>(
       `${this.entityName}/dishes`,
       { page: pageNumber, per_page: pageSize },
       { loaderId: 'dishes' }

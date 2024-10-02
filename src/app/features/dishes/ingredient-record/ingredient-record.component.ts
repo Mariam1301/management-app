@@ -5,6 +5,7 @@ import {
   MeasurementTypes,
 } from '../../../services/entity-management/entity-management.model';
 import { EntityManagementService } from '../../../services/entity-management/entity-management.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'ingredient-record-dialog',
@@ -28,14 +29,17 @@ export class IngredientRecordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._entityManagementService.getAllIngredients().subscribe((data) => {
-      this.ingredientOptions = data;
+    this._entityManagementService
+      .getAllIngredients()
+      .pipe(map((response) => response.data))
+      .subscribe((data) => {
+        this.ingredientOptions = data;
 
-      this.selectedRecord =
-        this.ingredientOptions.find(
-          (item) => item.id === this.ingredientRecord.id
-        ) || {};
-    });
+        this.selectedRecord =
+          this.ingredientOptions.find(
+            (item) => item.id === this.ingredientRecord.id
+          ) || {};
+      });
   }
 
   onIngredientSelect(ingredient: EntityModel) {

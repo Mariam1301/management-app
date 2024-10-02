@@ -18,6 +18,15 @@
         </p>
       </ng-template>
     </ui-data-element>
+    <ui-data-element name="დანახარჯი">
+      <ng-template uiTemplate let-purchase>
+        <p class="truncate">{{ purchase.total_price }}₾</p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element
+      name="ჯამური რაოდენობა"
+      valueField="total_amount"
+    ></ui-data-element>
   </ui-responsive-data-view>
 </div>
 
