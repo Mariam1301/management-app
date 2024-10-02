@@ -22,6 +22,11 @@ export class WrapperComponent {
     {
       title: 'გაყიდვები',
       path: 'sales',
+      icon: 'dollar-sign',
+    },
+    {
+      title: 'შესყიდვები',
+      path: 'purchases',
       icon: 'trending-up',
     },
   ];

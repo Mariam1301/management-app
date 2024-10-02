@@ -1,0 +1,30 @@
+<div class="p-5">
+  <ui-responsive-data-view
+    title="შესყიდვები"
+    loaderId="purchases"
+    [data]="purchases"
+    [showAddButton]="true"
+    [showDeleteButton]="true"
+    (addButtonClicked)="onAddClick()"
+    (deleteClicked)="onDeleteClick($event)"
+    (rowClicked)="onRowClick($event)"
+  >
+    <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
+    <ui-data-element name="თარიღი">
+      <ng-template uiTemplate let-sale>
+        <p class="truncate">
+          {{ sale.date | date : "dd/MM/yy" }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+  </ui-responsive-data-view>
+</div>
+
+@if(isDialogVisible){
+<ui-dialog [(visible)]="isDialogVisible" header="შესყიდვა">
+  <purchase-basic-form
+    [purchase]="selectedPurchase"
+    (saveClicked)="onSaveClick($event)"
+  ></purchase-basic-form>
+</ui-dialog>
+}

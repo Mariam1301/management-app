@@ -21,7 +21,7 @@ export class SalesPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.fetchIngredients();
+    this.fetchSales();
   }
 
   onRowClick(sale: Sale) {
@@ -42,16 +42,14 @@ export class SalesPageComponent {
         .createSale({
           ...sale,
         })
-        .subscribe(() => this.fetchIngredients());
+        .subscribe(() => this.fetchSales());
   }
 
   onDeleteClick(sale: Sale) {
-    this._salesService
-      .deleteSale(sale.id)
-      .subscribe(() => this.fetchIngredients());
+    this._salesService.deleteSale(sale.id).subscribe(() => this.fetchSales());
   }
 
-  fetchIngredients() {
+  fetchSales() {
     this._salesService.getAllSales().subscribe((sales) => {
       this.sales = sales;
       this.salesCount = sales?.length;

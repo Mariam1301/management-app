@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EntityModel } from '../../../services/entity-management/entity-management.model';
-import { SaleRecord } from '../../../services/sales/sales.model';
 import { EntityManagementService } from '../../../services/entity-management/entity-management.service';
+import { PurchaseRecord } from '../../../services/purchases/purchase.model';
 
 @Component({
   selector: 'record-dialog',
-  templateUrl: './record.component.html',
+  templateUrl: './purchase-record.component.html',
 })
-export class RecordComponent implements OnInit {
+export class PurchaseRecordComponent implements OnInit {
   @Input()
-  record: Partial<SaleRecord> = {};
+  record: Partial<PurchaseRecord> = {};
 
   @Output()
-  saveClicked = new EventEmitter<SaleRecord>();
+  saveClicked = new EventEmitter<PurchaseRecord>();
 
   entityOptions: EntityModel[] = [];
 
@@ -22,12 +22,12 @@ export class RecordComponent implements OnInit {
 
   ngOnInit(): void {
     this._entityManagementService
-      .getDishes()
+      .getAllIngredients()
       .subscribe((data) => (this.entityOptions = data));
   }
 
   onSaveClick() {
-    this.saveClicked.emit(this.record as SaleRecord);
+    this.saveClicked.emit(this.record as PurchaseRecord);
   }
 
   onEntitySelect(id: number) {

@@ -1,0 +1,58 @@
+<button class="flex items-center font-primeng sm:my-5 mt-12" routerLink="..">
+  <ui-icon name="chevron-left" [size]="18"></ui-icon>შესყიდვები
+</button>
+<div class="w-full bg-primeng-surface-0 p-5 my-5">
+  @if(editMode){
+  <purchase-basic-form
+    [purchase]="purchaseForm"
+    [isDialog]="false"
+    (saveClicked)="onSaveClick($event)"
+    (canceledClicked)="editMode = false"
+  ></purchase-basic-form>
+  }@else{
+  <div class="w-full flex justify-end">
+    <button (click)="onEditPurchaseClick()">
+      <ui-icon name="edit"></ui-icon>
+    </button>
+  </div>
+
+  <p class="font-primeng text-2xl font-bold mb-5">{{ purchase.title }}</p>
+  <p class="font-primeng text-primeng-surface-400">
+    თარიღი: {{ purchase.date | date : "dd/MM/yy" }}
+  </p>
+  <p></p>
+  }
+
+  <div
+    class="w-full my-8 border-b border-primeng-surface-300 border-spacing-10 border-dashed"
+  ></div>
+  <div>
+    <ui-responsive-data-view
+      title="შესყიდული ინგრედიენტები"
+      loaderId="records"
+      [data]="records"
+      [showAddButton]="true"
+      [showDeleteButton]="true"
+      (addButtonClicked)="onAddClick()"
+      (deleteClicked)="onDeleteClick($event)"
+      (rowClicked)="onRowClick($event)"
+    >
+      <ui-data-element name="კერძი" valueField="entity_title"></ui-data-element>
+      <ui-data-element name="რაოდენობა" valueField="amount"></ui-data-element>
+      <ui-data-element name="ფასი">
+        <ng-template uiTemplate let-record>
+          <p class="truncate">{{ record.price }}₾</p>
+        </ng-template>
+      </ui-data-element>
+    </ui-responsive-data-view>
+  </div>
+</div>
+
+@if(isDialogVisible){
+<ui-dialog [(visible)]="isDialogVisible" header="შესყიდვა">
+  <record-dialog
+    [record]="selectedPurchaseRecord"
+    (saveClicked)="onRecordSaveClick($event)"
+  ></record-dialog>
+</ui-dialog>
+}

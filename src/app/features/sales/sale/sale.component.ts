@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MeasurementTypes } from '../../../services/entity-management/entity-management.model';
 import { Sale } from '../../../services/sales/sales.model';
-import { SalesService } from '../../../services/sales/sales.service';
 import { formatDateToISODate } from '../../../utils/date-formating';
 
 @Component({
   selector: 'sale-basic-form',
   templateUrl: './sale.component.html',
 })
-export class SaleComponent implements OnInit {
+export class SaleComponent {
   @Input()
   sale: Partial<Sale> = {};
 
@@ -22,10 +21,6 @@ export class SaleComponent implements OnInit {
   canceledClicked = new EventEmitter();
 
   measurementTypeOptions = MeasurementTypes;
-
-  constructor(private readonly _salesService: SalesService) {}
-
-  ngOnInit(): void {}
 
   onSaveClick() {
     this.saveClicked.emit({
