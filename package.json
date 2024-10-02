@@ -21,6 +21,7 @@
     "@ngrx/store": "^18.0.2",
     "angular-oauth2-oidc": "^17.0.2",
     "feather-icons": "^4.29.2",
+    "primeicons": "^7.0.0",
     "primeng": "^17.18.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

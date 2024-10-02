@@ -24,7 +24,10 @@ export class SalesService {
   }
 
   updateSale(sale: Sale) {
-    return this._baseHttpService.put<unknown, Sale>(`${this.entityName}`, sale);
+    return this._baseHttpService.put<unknown, Partial<Sale>>(
+      `${this.entityName}/${sale.id}`,
+      { id: sale.id, title: sale.title, date: sale.date }
+    );
   }
   deleteSale(id: number) {
     return this._baseHttpService.delete<unknown>(`${this.entityName}/${id}`);
@@ -42,6 +45,16 @@ export class SalesService {
     return this._baseHttpService.post<unknown, SaleRecord>(
       `${this.entityName}/${saleId}/record`,
       record
+    );
+  }
+  updateRecord(saleId: number, record: SaleRecord) {
+    return this._baseHttpService.put<unknown, Partial<SaleRecord>>(
+      `${this.entityName}/${saleId}/record/${record.id}`,
+      {
+        entity_id: record.entity_id,
+        amount: record.amount,
+        price: record.price,
+      }
     );
   }
 

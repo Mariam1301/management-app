@@ -17,20 +17,23 @@
   </div>
   }@else {
   <div class="w-full flex justify-end">
-    <button
+    <p-button
+      icon="pi pi-pencil"
+      label="ცვლილება"
+      severity="secondary"
+      [text]="true"
+      [outlined]="true"
       (click)="onEditSaleClick()"
-      class="py-3 px-3 p-element group space-x-2 flex items-center p-button p-component p-button-secondary"
     >
-      <p class="w-0 group-hover:w-full group-hover:opacity-100 opacity-0">
-        ცვლილება
-      </p>
-      <ui-icon name="edit-2" [size]="18" class="text-black"></ui-icon>
-    </button>
+    </p-button>
   </div>
   }
 </div>
 
-<div class="w-full bg-primeng-surface-0 p-5 my-5">
+<div
+  class="w-full bg-primeng-surface-0 p-5 my-5 border"
+  [ngClass]="{ 'border-dashed ': editMode }"
+>
   @if(editMode){
 
   <dish-basic-form [dish]="dishForm" [isDialog]="false"></dish-basic-form>
@@ -49,6 +52,7 @@
       [showDeleteButton]="editMode"
       [clickable]="editMode"
       [emitDeleteIndex]="true"
+      [emitRowIndex]="true"
       (addButtonClicked)="onAddClick()"
       (deleteClicked)="onDeleteClick($event)"
       (rowClicked)="onRowClick($event)"
@@ -72,7 +76,11 @@
 @if(isDialogVisible){
 <ui-dialog [(visible)]="isDialogVisible" header="გაყიდვა">
   <ingredient-record-dialog
-    [ingredientRecord]="selectedIngredient || {}"
+    [ingredientRecord]="
+      selectedIngredientIndex !== undefined
+        ? (dishForm.ingredients || [])[selectedIngredientIndex]
+        : {}
+    "
     (saveClicked)="onRecordSaveClick($event)"
   ></ingredient-record-dialog>
 </ui-dialog>

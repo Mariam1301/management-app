@@ -1,3 +1,8 @@
 export function formatDateToISODate(date: Date | string) {
-  return new Date(date as Date).toISOString().split('T')[0];
+  const localDate = new Date(date as Date);
+  const year = localDate.getFullYear();
+  const month = ('0' + (localDate.getMonth() + 1)).slice(-2);
+  const day = ('0' + localDate.getDate()).slice(-2);
+
+  return `${year}-${month}-${day}`;
 }

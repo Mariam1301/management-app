@@ -7,6 +7,7 @@ export interface Sale {
 }
 
 export interface SaleRecord {
+  id: number;
   entity_id: number;
   amount: number;
   price: number;

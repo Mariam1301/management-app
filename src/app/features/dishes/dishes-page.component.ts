@@ -27,8 +27,6 @@ export class DishesPageComponent {
   }
 
   onRowClick(dish: EntityModel) {
-    // this.isDialogVisible = true;
-    // this.selectedDish = { ...dish };
     this._router.navigate(['dishes', 'details'], {
       queryParams: { id: dish?.id },
     });
@@ -47,7 +45,11 @@ export class DishesPageComponent {
           ...dish,
           type: EntityTypeEnum.Dish,
         })
-        .subscribe(() => this.fetchDishes());
+        .subscribe(({ id }) => {
+          this._router.navigate(['dishes', 'details'], {
+            queryParams: { id },
+          });
+        });
   }
 
   onDeleteClick(dish: EntityModel) {

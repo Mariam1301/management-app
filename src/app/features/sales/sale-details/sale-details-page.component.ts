@@ -43,7 +43,7 @@ export class SaleDetailsPageComponent implements OnInit {
 
   onDeleteClick(record: SaleRecord) {
     this._salesService
-      .deleteRecord(this.saleId, record.entity_id)
+      .deleteRecord(this.saleId, record.id)
       .subscribe(() => this.fetchRecords());
   }
 
@@ -54,9 +54,11 @@ export class SaleDetailsPageComponent implements OnInit {
 
   onRecordSaveClick(record: SaleRecord) {
     this.isDialogVisible = false;
-    this._salesService
-      .addRecord(this.saleId, record)
-      .subscribe(() => this.fetchRecords());
+    const stream$ = record.id
+      ? this._salesService.updateRecord(this.saleId, record)
+      : this._salesService.addRecord(this.saleId, record);
+
+    stream$.subscribe(() => this.fetchRecords());
   }
 
   fetchRecords() {

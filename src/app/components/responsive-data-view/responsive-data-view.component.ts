@@ -42,6 +42,9 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
   @Input()
   emitDeleteIndex = false;
 
+  @Input()
+  emitRowIndex = false;
+
   @Output()
   addButtonClicked = new EventEmitter();
 
@@ -78,8 +81,7 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
     this.columnList = this.contentChildren.toArray();
   }
 
-  onDeleteClick(event: MouseEvent, row: any, index?: number) {
-    event.stopImmediatePropagation();
+  onDeleteClick(row: any, index?: number) {
     this.emitDeleteIndex
       ? this.deleteClicked.emit(index)
       : this.deleteClicked.emit(row);

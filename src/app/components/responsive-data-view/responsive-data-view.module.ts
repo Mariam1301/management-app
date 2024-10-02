@@ -6,6 +6,7 @@ import { UiIconComponent } from '../icon/icon.component';
 import { UiDataElement } from './data-element/data-element.component';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
+import { UiConfirmationDirective } from '../confirmation/confirmation.directive';
 
 @NgModule({
   declarations: [UiResponsiveDataViewComponent, UiDataElement],
@@ -15,6 +16,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     UiIconComponent,
     ButtonModule,
     SkeletonModule,
+    UiConfirmationDirective,
   ],
   exports: [UiResponsiveDataViewComponent, UiDataElement],
 })

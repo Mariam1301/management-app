@@ -14,8 +14,9 @@ import { LoginModule } from './features/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { provideHttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,9 +33,10 @@ import { ToastModule } from 'primeng/toast';
     StoreModule.forRoot({ count: counterReducer }, {}),
     DashboardModule,
     BrowserAnimationsModule,
+    ConfirmDialogModule,
     OAuthModule.forRoot(),
   ],
-  providers: [provideHttpClient(), MessageService],
+  providers: [provideHttpClient(), MessageService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

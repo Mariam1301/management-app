@@ -1,7 +1,6 @@
 import { Component, DestroyRef } from '@angular/core';
 import {
   Dish,
-  EntityModel,
   IngredientRecord,
 } from '../../../services/entity-management/entity-management.model';
 import { EntityManagementService } from '../../../services/entity-management/entity-management.service';
@@ -19,7 +18,7 @@ export class DishDetailsComponent {
 
   isDialogVisible = false;
 
-  selectedIngredient?: Partial<IngredientRecord>;
+  selectedIngredientIndex?: number;
 
   editMode = false;
 
@@ -33,13 +32,11 @@ export class DishDetailsComponent {
     this.dishId = Number(this._route.snapshot?.queryParamMap?.get('id'));
     this._route.data
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((data) => {
-        this.dish = data['details'];
-        console.log(data['details']);
-      });
+      .subscribe((data) => (this.dish = data['details']));
   }
 
   onAddClick() {
+    this.selectedIngredientIndex = undefined;
     this.isDialogVisible = true;
   }
 
@@ -47,29 +44,24 @@ export class DishDetailsComponent {
     this.dishForm.ingredients?.splice(index, 1);
   }
 
-  onRowClick(record: IngredientRecord) {
+  onRowClick(index: number) {
     this.isDialogVisible = true;
-    this.selectedIngredient = { ...record };
+    this.selectedIngredientIndex = index;
   }
 
   onRecordSaveClick(record: IngredientRecord) {
     this.isDialogVisible = false;
 
-    const index =
-      this.dishForm.ingredients?.findIndex(
-        (ingredient) => ingredient?.id === record.id
-      ) || 0;
-
-    if (index !== -1) {
-      (this.dishForm.ingredients || [])[index] = {
-        ...(this.dishForm.ingredients || [])[index],
+    if (this.selectedIngredientIndex !== undefined) {
+      (this.dishForm.ingredients || [])[this.selectedIngredientIndex] = {
+        ...(this.dishForm.ingredients || [])[this.selectedIngredientIndex],
         ...record,
       };
     } else {
-      this.dishForm.ingredients?.push(record);
+      this.dishForm.ingredients?.unshift(record);
     }
 
-    this.selectedIngredient = undefined;
+    this.selectedIngredientIndex = undefined;
   }
 
   fetchSale(dishId: number) {
@@ -78,7 +70,14 @@ export class DishDetailsComponent {
 
   onSaveClick() {
     this._entityService
-      .updateDish(this.dishForm)
+      .updateDish({
+        ...this.dishForm,
+        ingredients: this.dishForm.ingredients?.map((ingredient) => ({
+          id: ingredient.id,
+          measurement_amount: ingredient.measurement_amount,
+          measurement_type: ingredient.measurement_type,
+        })),
+      })
       .pipe(switchMap(() => this._entityService.getDish(this.dishId)))
       .subscribe((data) => {
         this.dish = data;

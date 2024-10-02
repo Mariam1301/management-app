@@ -9,11 +9,7 @@
 /* @import "primeng/resources/themes/lara-dark-indigo/theme.css"; */
 /* @import "primeng/resources/themes/rhea/theme.css"; */
 
-@import "./styles/fonts.css";
-
-body {
-  @apply font-arialGeo;
-}
+@import "primeicons/primeicons.css";
 
 .spinner {
   max-width: 100px;
@@ -38,7 +34,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .p-calendar,
 .p-dropdown {
-  @apply w-full;
+  @apply w-full max-w-full;
 }
 
 .p-dialog-content {
@@ -58,4 +54,20 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: translateX(-50%);
     right: auto;
   }
+}
+
+.p-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.p-hidden-accessible input,
+.p-hidden-accessible select {
+  transform: scale(0);
 }
