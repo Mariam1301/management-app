@@ -10,10 +10,14 @@ export class SalesService {
 
   constructor(private readonly _baseHttpService: BaseHttpService) {}
 
-  getAllSales() {
-    return this._baseHttpService.get<Sale[]>(`${this.entityName}`, undefined, {
-      loaderId: 'sales',
-    });
+  getAllSales(pageNumber: number, pageSize: number) {
+    return this._baseHttpService.get<Sale[]>(
+      `${this.entityName}`,
+      { page: pageNumber, per_page: pageSize },
+      {
+        loaderId: 'sales',
+      }
+    );
   }
 
   getSaleById(id: number) {

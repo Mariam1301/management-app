@@ -2,26 +2,30 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Purchase } from '../../services/purchases/purchase.model';
 import { PurchasesService } from '../../services/purchases/purchase.service';
+import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
+import UiDatasourceCreator from '../../components/data-source/data-source-creator';
 
 @Component({
   selector: 'app-purchases',
   templateUrl: './purchase-page.component.html',
 })
 export class PurchasesPageComponent {
-  purchases!: Purchase[];
-
   isDialogVisible = false;
 
   selectedPurchase!: Partial<Purchase>;
 
-  purchasesCount = 0;
+  purchasesDataSource!: UiPaginationDataSource;
   constructor(
     private readonly _purchasesService: PurchasesService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _dsCreator: UiDatasourceCreator
   ) {}
 
   ngOnInit(): void {
-    this.fetchPurchases();
+    this.purchasesDataSource = this._dsCreator.createWithPagination(
+      (pageNumber, pageSize) =>
+        this._purchasesService.getAllPurchases(pageNumber, pageSize)
+    );
   }
 
   onRowClick(purcahse: Purchase) {
@@ -42,19 +46,12 @@ export class PurchasesPageComponent {
         .createPurchase({
           ...purchase,
         })
-        .subscribe(() => this.fetchPurchases());
+        .subscribe(() => this.purchasesDataSource.fetchSpecificPage(1));
   }
 
   onDeleteClick(purchase: Purchase) {
     this._purchasesService
       .deletePurchase(purchase.id)
-      .subscribe(() => this.fetchPurchases());
-  }
-
-  fetchPurchases() {
-    this._purchasesService.getAllPurchases().subscribe((purcahse) => {
-      this.purchases = purcahse;
-      this.purchasesCount = purcahse?.length;
-    });
+      .subscribe(() => this.purchasesDataSource.refresh());
   }
 }

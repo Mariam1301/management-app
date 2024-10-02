@@ -1,6 +1,8 @@
 import { Observable } from 'rxjs';
 
-export type ParamsType = { [key: string]: string | number | boolean };
+export type ParamsType = {
+  [key: string]: string | number | boolean | undefined;
+};
 
 export type HttpRequestOptions = {
   loaderId?: string;

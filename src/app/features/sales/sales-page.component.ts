@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Sale } from '../../services/sales/sales.model';
 import { SalesService } from '../../services/sales/sales.service';
 import { Router } from '@angular/router';
+import UiDatasourceCreator from '../../components/data-source/data-source-creator';
+import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
 
 @Component({
   selector: 'app-sales',
@@ -15,13 +17,20 @@ export class SalesPageComponent {
   selectedSale!: Partial<Sale>;
 
   salesCount = 0;
+
+  salesDataSource!: UiPaginationDataSource;
+
   constructor(
     private readonly _salesService: SalesService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _dsCreator: UiDatasourceCreator
   ) {}
 
   ngOnInit(): void {
-    this.fetchSales();
+    this.salesDataSource = this._dsCreator.createWithPagination(
+      (pageNumber, pageSize) =>
+        this._salesService.getAllSales(pageNumber, pageSize)
+    );
   }
 
   onRowClick(sale: Sale) {
@@ -50,9 +59,6 @@ export class SalesPageComponent {
   }
 
   fetchSales() {
-    this._salesService.getAllSales().subscribe((sales) => {
-      this.sales = sales;
-      this.salesCount = sales?.length;
-    });
+    this.salesDataSource.fetchData();
   }
 }

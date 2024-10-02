@@ -7,9 +7,17 @@ import { UiDataElement } from './data-element/data-element.component';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { UiConfirmationDirective } from '../confirmation/confirmation.directive';
+import { UiPaginatorComponent } from './paginator/paginator.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { UiLoadMoreButtonComponent } from './load-more/load-more-button.component';
 
 @NgModule({
-  declarations: [UiResponsiveDataViewComponent, UiDataElement],
+  declarations: [
+    UiResponsiveDataViewComponent,
+    UiDataElement,
+    UiPaginatorComponent,
+    UiLoadMoreButtonComponent,
+  ],
   imports: [
     TableModule,
     CommonModule,
@@ -17,6 +25,8 @@ import { UiConfirmationDirective } from '../confirmation/confirmation.directive'
     ButtonModule,
     SkeletonModule,
     UiConfirmationDirective,
+    PaginatorModule,
+    ButtonModule,
   ],
   exports: [UiResponsiveDataViewComponent, UiDataElement],
 })

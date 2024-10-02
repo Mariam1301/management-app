@@ -2,9 +2,10 @@
   <ui-responsive-data-view
     title="გაყიდვები"
     loaderId="sales"
-    [data]="sales"
+    [dataSource]="salesDataSource"
     [showAddButton]="true"
     [showDeleteButton]="true"
+    [hasPagination]="true"
     (addButtonClicked)="onAddClick()"
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"

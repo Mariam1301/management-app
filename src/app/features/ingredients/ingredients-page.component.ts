@@ -4,24 +4,28 @@ import {
   EntityTypeEnum,
   EntityModel,
 } from '../../services/entity-management/entity-management.model';
+import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
+import UiDatasourceCreator from '../../components/data-source/data-source-creator';
 
 @Component({
   templateUrl: './ingredients-page.component.html',
 })
 export class IngredientsPageComponent implements OnInit {
-  ingredients!: EntityModel[];
-
   isIngredientDialogVisible = false;
 
   selectedIngredient!: Partial<EntityModel>;
 
-  ingredientsCount = 0;
+  ingredientsDataSource!: UiPaginationDataSource;
   constructor(
-    private readonly _entityManagementService: EntityManagementService
+    private readonly _entityManagementService: EntityManagementService,
+    private readonly _dsCreator: UiDatasourceCreator
   ) {}
 
   ngOnInit(): void {
-    this.fetchIngredients();
+    this.ingredientsDataSource = this._dsCreator.createWithPagination(
+      (pageNumber, pageSize) =>
+        this._entityManagementService.getAllIngredients(pageNumber, pageSize)
+    );
   }
 
   onRowClick(ingredient: EntityModel) {
@@ -35,29 +39,23 @@ export class IngredientsPageComponent implements OnInit {
   }
 
   onSaveClick(ingredient: EntityModel) {
-    let stream$ = ingredient.id
-      ? this._entityManagementService.updateIngredient(ingredient)
-      : this._entityManagementService.addEntity({
-          ...ingredient,
-          type: EntityTypeEnum.Ingredient,
-        });
+    ingredient.id
+      ? this._entityManagementService
+          .updateIngredient(ingredient)
+          .subscribe(() => this.ingredientsDataSource.refresh())
+      : this._entityManagementService
+          .addEntity({
+            ...ingredient,
+            type: EntityTypeEnum.Ingredient,
+          })
+          .subscribe(() => this.ingredientsDataSource.fetchSpecificPage(1));
 
     this.isIngredientDialogVisible = false;
-    stream$.subscribe(() => this.fetchIngredients());
   }
 
   onDeleteClick(ingredient: EntityModel) {
     this._entityManagementService
       .deleteEntity(ingredient.id)
-      .subscribe(() => this.fetchIngredients());
-  }
-
-  fetchIngredients() {
-    this._entityManagementService
-      .getAllIngredients()
-      .subscribe((ingredients) => {
-        this.ingredients = ingredients;
-        this.ingredientsCount = ingredients?.length;
-      });
+      .subscribe(() => this.ingredientsDataSource.refresh());
   }
 }

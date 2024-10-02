@@ -15,6 +15,7 @@ export interface IngredientRecord {
 
 export interface Dish extends EntityModel {
   ingredients?: IngredientRecord[];
+  ingredients_cost: number;
 }
 
 export enum EntityTypeEnum {

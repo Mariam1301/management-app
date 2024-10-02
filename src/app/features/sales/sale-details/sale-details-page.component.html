@@ -16,10 +16,11 @@
     </button>
   </div>
 
-  <p class="font-primeng text-2xl font-bold mb-5">{{ sale.title }}</p>
-  <p class="font-primeng text-primeng-surface-400">
+  <p class="font-primeng text-2xl font-bold mb-2">{{ sale.title }}</p>
+  <p class="font-primeng text-primeng-surface-400 mb-5">
     თარიღი: {{ sale.date | date : "dd/MM/yy" }}
   </p>
+  <p class="font-primeng">სულ შემოსავალი: 30₾</p>
   <p></p>
   }
 
@@ -49,6 +50,12 @@
       </ui-data-element>
     </ui-responsive-data-view>
   </div>
+  <!-- <div
+    class="w-full mt-14 border-b border-primeng-surface-300 border-spacing-10 border-dashed"
+  ></div>
+  <div class="w-full py-4 text-lg font-semibold flex justify-end">
+    <p>სულ შემოსავალი: 30₾</p>
+  </div> -->
 </div>
 
 @if(isDialogVisible){

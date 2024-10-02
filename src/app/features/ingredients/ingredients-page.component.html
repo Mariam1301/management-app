@@ -2,9 +2,10 @@
   <ui-responsive-data-view
     title="ნედლეული"
     loaderId="ingredient"
-    [data]="ingredients"
+    [dataSource]="ingredientsDataSource"
     [showAddButton]="true"
     [showDeleteButton]="true"
+    [hasPagination]="true"
     (addButtonClicked)="onAddClick()"
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"

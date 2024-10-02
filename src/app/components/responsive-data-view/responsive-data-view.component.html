@@ -30,13 +30,10 @@
   <p-skeleton width="100%" height="10rem" styleClass="mb-4" />
 </div>
 
-}@else{ @if((data?.length||0)>0){
+}@else{ @if(((data?.length||0)>0)||((dataSource?.data?.length||0)>0)){
 <div class="hidden sm:block border border-primeng-surface-200">
   <p-table
-    [paginator]="(data?.length || 0) > 10"
-    [value]="data || []"
-    [rows]="10"
-    [totalRecords]="data?.length || 0"
+    [value]="data || dataSource?.data || []"
     [tableStyle]="{ 'min-width': '50rem' }"
   >
     <ng-template pTemplate="header">
@@ -91,7 +88,7 @@
 </div>
 
 <div class="sm:hidden">
-  @for( dataItem of data;let i = $index; track i; ){
+  @for( dataItem of (data||dataSource?.data);let i = $index; track i; ){
   <button
     class="w-full border border-primeng-surface-200 bg-primeng-surface-0 max-w-full rounded-md my-3"
     [ngClass]="{
@@ -141,4 +138,11 @@
 <p class="w-full text-center font-primeng py-5 text-primeng-surface-400">
   ჩანაწერი არ არის
 </p>
-} }
+} } @if(hasPagination){
+<div class="hidden sm:block">
+  <ui-paginator [dataSource]="dataSource"></ui-paginator>
+</div>
+<div class="sm:hidden">
+  <ui-load-more-button [dataSource]="dataSource"></ui-load-more-button>
+</div>
+}

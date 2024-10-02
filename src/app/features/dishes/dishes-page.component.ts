@@ -5,25 +5,30 @@ import {
 } from '../../services/entity-management/entity-management.model';
 import { EntityManagementService } from '../../services/entity-management/entity-management.service';
 import { Router } from '@angular/router';
+import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
+import UiDatasourceCreator from '../../components/data-source/data-source-creator';
 
 @Component({
   templateUrl: './dishes-page.component.html',
 })
 export class DishesPageComponent {
-  dishes!: EntityModel[];
-
   isDialogVisible = false;
 
   selectedDish!: Partial<EntityModel>;
 
-  dishesCount = 0;
+  dishesDataSource?: UiPaginationDataSource;
+
   constructor(
     private readonly _entityManagementService: EntityManagementService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _dsCreator: UiDatasourceCreator
   ) {}
 
   ngOnInit(): void {
-    this.fetchDishes();
+    this.dishesDataSource = this._dsCreator.createWithPagination(
+      (pageNumber, pageSize) =>
+        this._entityManagementService.getDishes(pageNumber, pageSize)
+    );
   }
 
   onRowClick(dish: EntityModel) {
@@ -55,13 +60,6 @@ export class DishesPageComponent {
   onDeleteClick(dish: EntityModel) {
     this._entityManagementService
       .deleteEntity(dish.id)
-      .subscribe(() => this.fetchDishes());
-  }
-
-  fetchDishes() {
-    this._entityManagementService.getDishes().subscribe((dishes) => {
-      this.dishes = dishes;
-      this.dishesCount = dishes?.length;
-    });
+      .subscribe(() => this.dishesDataSource?.refresh());
   }
 }

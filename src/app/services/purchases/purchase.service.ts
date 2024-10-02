@@ -10,10 +10,10 @@ export class PurchasesService {
 
   constructor(private readonly _baseHttpService: BaseHttpService) {}
 
-  getAllPurchases() {
+  getAllPurchases(pageNumber: number, pageSize: number) {
     return this._baseHttpService.get<Purchase[]>(
       `${this.entityName}`,
-      undefined,
+      { page: pageNumber, per_page: pageSize },
       {
         loaderId: 'purchases',
       }

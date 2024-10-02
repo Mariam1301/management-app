@@ -18,18 +18,18 @@ export class EntityManagementService {
     );
   }
 
-  getAllIngredients() {
+  getAllIngredients(pageNumber?: number, pageSize?: number) {
     return this._baseHttpService.get<EntityModel[]>(
       `${this.entityName}/ingredients`,
-      undefined,
+      { page: pageNumber, per_page: pageSize },
       { loaderId: 'ingredient' }
     );
   }
 
-  getDishes() {
+  getDishes(pageNumber?: number, pageSize?: number) {
     return this._baseHttpService.get<EntityModel[]>(
       `${this.entityName}/dishes`,
-      undefined,
+      { page: pageNumber, per_page: pageSize },
       { loaderId: 'dishes' }
     );
   }

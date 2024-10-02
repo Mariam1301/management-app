@@ -24,8 +24,11 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
   @Input()
   showDeleteButton?: boolean;
 
-  @Input({ required: true })
-  data?: any[] = [];
+  @Input()
+  data?: any[];
+
+  @Input()
+  dataSource?: any;
 
   @Input()
   trackPropertyName = 'id';
@@ -44,6 +47,9 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
 
   @Input()
   emitRowIndex = false;
+
+  @Input()
+  hasPagination? = false;
 
   @Output()
   addButtonClicked = new EventEmitter();
@@ -67,6 +73,7 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.dataSource?.fetchData();
     if (this.loaderId) {
       this._loaderService.loader$
         .pipe(takeUntilDestroyed(this._destroyRef))

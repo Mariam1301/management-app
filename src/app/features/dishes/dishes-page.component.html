@@ -2,9 +2,10 @@
   <ui-responsive-data-view
     title="პროდუქტები"
     loaderId="dishes"
-    [data]="dishes"
+    [dataSource]="dishesDataSource"
     [showAddButton]="true"
     [showDeleteButton]="true"
+    [hasPagination]="true"
     (addButtonClicked)="onAddClick()"
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"
@@ -20,6 +21,11 @@
     <ui-data-element name="ფასი">
       <ng-template uiTemplate let-dish>
         <p class="truncate">{{ dish.price }}₾</p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="ნედლეულის ხარჯი">
+      <ng-template uiTemplate let-dish>
+        <p class="truncate">{{ dish.ingredients_cost }}₾</p>
       </ng-template>
     </ui-data-element>
   </ui-responsive-data-view>
