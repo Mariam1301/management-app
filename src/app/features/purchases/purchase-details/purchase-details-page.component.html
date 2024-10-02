@@ -10,17 +10,17 @@
     (canceledClicked)="editMode = false"
   ></purchase-basic-form>
   }@else{
-  <div class="w-full flex justify-end">
+  <div class="w-full flex justify-between items-center">
+    <p class="font-primeng text-primeng-surface-400">
+      თარიღი: {{ purchase.date | date : "dd/MM/yy" }}
+    </p>
     <button (click)="onEditPurchaseClick()">
       <ui-icon name="edit"></ui-icon>
     </button>
   </div>
 
-  <p class="font-primeng text-2xl font-bold mb-5">{{ purchase.title }}</p>
-  <p class="font-primeng text-primeng-surface-400">
-    თარიღი: {{ purchase.date | date : "dd/MM/yy" }}
-  </p>
-  <p></p>
+  <p class="font-primeng text-2xl font-bold mb-5 mt-8">{{ purchase.title }}</p>
+  <p class="font-primeng mb-2">სულ დანახარჯი: {{ purchase.total_price }}₾</p>
   }
 
   <div
