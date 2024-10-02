@@ -1,6 +1,6 @@
 <div class="p-5">
   <ui-responsive-data-view
-    title="კერძები"
+    title="პროდუქტები"
     loaderId="dishes"
     [data]="dishes"
     [showAddButton]="true"
@@ -26,7 +26,7 @@
 </div>
 
 @if(isDialogVisible){
-<ui-dialog [(visible)]="isDialogVisible" header="კერძი">
+<ui-dialog [(visible)]="isDialogVisible" header="პროდუქტი">
   <dish-basic-form
     [dish]="selectedDish"
     (saveClicked)="onSaveClick($event)"

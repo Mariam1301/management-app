@@ -3,7 +3,7 @@
     class="flex items-center font-primeng sm:my-5 mb-12 mt-5"
     routerLink=".."
   >
-    <ui-icon name="chevron-left" [size]="18"></ui-icon>კერძები
+    <ui-icon name="chevron-left" [size]="18"></ui-icon>პროდუქტები
   </button>
 
   @if(editMode){
@@ -46,7 +46,7 @@
 
   <div>
     <ui-responsive-data-view
-      title="ინგრედიენტები"
+      title="ნედლეული"
       [data]="dish.ingredients"
       [showAddButton]="editMode"
       [showDeleteButton]="editMode"
@@ -57,7 +57,7 @@
       (deleteClicked)="onDeleteClick($event)"
       (rowClicked)="onRowClick($event)"
     >
-      <ui-data-element name="ინგრედიენტი" valueField="title"></ui-data-element>
+      <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
       <ui-data-element name="რაოდენობა">
         <ng-template uiTemplate let-ingredient>
           <p class="truncate">

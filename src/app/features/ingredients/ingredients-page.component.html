@@ -1,6 +1,6 @@
 <div class="p-5">
   <ui-responsive-data-view
-    title="ინგრედიენტები"
+    title="ნედლეული"
     loaderId="ingredient"
     [data]="ingredients"
     [showAddButton]="true"
@@ -25,7 +25,7 @@
   </ui-responsive-data-view>
 </div>
 @if(isIngredientDialogVisible){
-<ui-dialog [(visible)]="isIngredientDialogVisible" header="ინგრედიენტი">
+<ui-dialog [(visible)]="isIngredientDialogVisible" header="ნედლეული">
   <ingredient-dialog
     [ingredient]="selectedIngredient"
     (saveClicked)="onSaveClick($event)"

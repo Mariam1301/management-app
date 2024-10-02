@@ -28,7 +28,7 @@
   ></div>
   <div>
     <ui-responsive-data-view
-      title="გაყიდული კერძები"
+      title="გაყიდული პროდუქტები"
       loaderId="records"
       [data]="records"
       [showAddButton]="true"
@@ -37,7 +37,10 @@
       (deleteClicked)="onDeleteClick($event)"
       (rowClicked)="onRowClick($event)"
     >
-      <ui-data-element name="კერძი" valueField="entity_title"></ui-data-element>
+      <ui-data-element
+        name="პროდუქტი"
+        valueField="entity_title"
+      ></ui-data-element>
       <ui-data-element name="რაოდენობა" valueField="amount"></ui-data-element>
       <ui-data-element name="ფასი">
         <ng-template uiTemplate let-record>

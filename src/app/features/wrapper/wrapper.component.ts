@@ -10,12 +10,12 @@ export class WrapperComponent {
 
   navigationArray: NavigationModel[] = [
     {
-      title: 'ინგრედიენტები',
+      title: 'ნედლეული',
       path: 'ingredients',
       icon: 'droplet',
     },
     {
-      title: 'კერძები',
+      title: 'პროდუქტები',
       path: 'dishes',
       icon: 'coffee',
     },
