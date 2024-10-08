@@ -11,21 +11,27 @@
     (rowClicked)="onRowClick($event)"
   >
     <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
-    <ui-data-element name="ერთეული">
-      <ng-template uiTemplate let-dish>
-        <p class="truncate">
-          {{ dish.measurement_type | measurementType }}
-        </p>
-      </ng-template>
-    </ui-data-element>
+
     <ui-data-element name="ფასი">
       <ng-template uiTemplate let-dish>
-        <p class="truncate">{{ dish.price }}₾</p>
+        <p class="truncate">{{ dish.price | number : "1.2-2" }}₾</p>
       </ng-template>
     </ui-data-element>
     <ui-data-element name="ნედლეულის ხარჯი">
       <ng-template uiTemplate let-dish>
-        <p class="truncate">{{ dish.ingredients_cost }}₾</p>
+        <p class="truncate">{{ dish.ingredients_cost | number : "1.2-2" }}₾</p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="მარაგი">
+      <ng-template uiTemplate let-dish>
+        <p
+          class="truncate"
+          [ngClass]="{
+            'text-red-500': dish.status === entityStockStatus.Negative
+          }"
+        >
+          {{ dish.stock_amount }} {{ dish.measurement_type | measurementType }}
+        </p>
       </ng-template>
     </ui-data-element>
   </ui-responsive-data-view>

@@ -38,6 +38,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'production',
+
+        loadChildren: () =>
+          import('../production/production-page.module').then(
+            (m) => m.ProductionPageModule
+          ),
+      },
+      {
         path: 'not-found',
         loadChildren: () =>
           import('../not-found/not-found.module').then((m) => m.NotFoundModule),

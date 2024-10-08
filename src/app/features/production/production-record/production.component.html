@@ -1,0 +1,43 @@
+<form #form="ngForm" class="flex flex-col pb-5 max-w-screen">
+  <div class="flex flex-col pb-5">
+    <label for="entity" class="pb-1 font-primeng">პროდუქტი</label>
+    <p-dropdown
+      required
+      name="entity"
+      appendTo="body"
+      optionLabel="title"
+      optionValue="id"
+      placeholder="აირჩიე პროდუქტი"
+      class="w-full"
+      [options]="entityOptions"
+      [(ngModel)]="productionRecord.entity_id"
+    />
+  </div>
+  <div class="flex flex-col pb-5">
+    <label for="amount" class="pb-1 font-primeng">რაოდენობა</label>
+    <input
+      required
+      pInputText
+      name="amount"
+      id="amount"
+      type="number"
+      class="w-full"
+      aria-describedby="amount-help"
+      [(ngModel)]="productionRecord.amount"
+    />
+  </div>
+  <label for="quantity" class="pb-1 font-primeng">თარიღი</label>
+  <p-calendar
+    name="date"
+    appendTo="body"
+    dateFormat="yy-mm-dd"
+    hourFormat="24"
+    class="mb-5"
+    [(ngModel)]="productionRecord.date"
+  />
+
+  <ui-dialog-actions
+    [disabled]="form.invalid"
+    (saveClicked)="onSaveClick()"
+  ></ui-dialog-actions>
+</form>

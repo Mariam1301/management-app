@@ -1,0 +1,78 @@
+<div class="p-5">
+  <ui-responsive-data-view
+    title="წარმოება"
+    loaderId="production"
+    [dataSource]="productionDataSource"
+    [showAddButton]="true"
+    [showDeleteButton]="true"
+    [hasPagination]="true"
+    (addButtonClicked)="onAddClick()"
+    (deleteClicked)="onDeleteClick($event)"
+    (rowClicked)="onRowClick($event)"
+  >
+    <ng-template uiTemplate="filter">
+      <div>
+        <div class="mb-4">
+          <label for="quantity">თარიღი -დან</label>
+          <p-calendar
+            name="date"
+            appendTo="body"
+            dateFormat="yy-mm-dd"
+            hourFormat="24"
+            [showClear]="true"
+            [maxDate]="productionDataSource.filter.end_date"
+            [(ngModel)]="productionDataSource.filter.start_date"
+          />
+        </div>
+        <div>
+          <label for="quantity">თარიღი -მდე</label>
+          <p-calendar
+            name="date"
+            appendTo="body"
+            dateFormat="yy-mm-dd"
+            hourFormat="24"
+            [showClear]="true"
+            [minDate]="productionDataSource.filter.start_date"
+            [(ngModel)]="productionDataSource.filter.end_date"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="flex flex-col">
+          <label for="product">პროდუქტი</label>
+          <input
+            pInputText
+            name="product"
+            id="keyword"
+            type="text"
+            aria-describedby="keyword-search"
+            [(ngModel)]="productionDataSource.filter.keyword"
+          />
+        </div>
+      </div>
+    </ng-template>
+    <ui-data-element name="პროდუქტი">
+      <ng-template uiTemplate let-production>
+        <p class="truncate">
+          {{ production.entity.title }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="რაოდენობა" valueField="amount"> </ui-data-element>
+    <ui-data-element name="თარიღი">
+      <ng-template uiTemplate let-production>
+        <p class="truncate">
+          {{ production.date | date : "dd/MM/yy" }}
+        </p>
+      </ng-template>
+    </ui-data-element>
+  </ui-responsive-data-view>
+</div>
+@if(isDialogVisible){
+<ui-dialog [(visible)]="isDialogVisible" header="წარმოება">
+  <production-record-dialog
+    [productionRecord]="selectedProductionRecord"
+    (saveClicked)="onSaveClick($event)"
+  ></production-record-dialog>
+</ui-dialog>
+}

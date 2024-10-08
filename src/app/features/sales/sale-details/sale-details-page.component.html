@@ -49,7 +49,7 @@
       <ui-data-element name="რაოდენობა" valueField="amount"></ui-data-element>
       <ui-data-element name="ფასი">
         <ng-template uiTemplate let-record>
-          <p class="truncate">{{ record.price }}₾</p>
+          <p class="truncate">{{ record.price | number : "1.2-2" }}₾</p>
         </ng-template>
       </ui-data-element>
     </ui-responsive-data-view>

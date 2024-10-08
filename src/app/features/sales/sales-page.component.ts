@@ -55,7 +55,9 @@ export class SalesPageComponent {
   }
 
   onDeleteClick(sale: Sale) {
-    this._salesService.deleteSale(sale.id).subscribe(() => this.fetchSales());
+    this._salesService
+      .deleteSale(sale.id)
+      .subscribe(() => this.salesDataSource.refresh());
   }
 
   fetchSales() {

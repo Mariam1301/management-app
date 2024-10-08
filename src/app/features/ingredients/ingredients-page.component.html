@@ -20,7 +20,7 @@
     </ui-data-element>
     <ui-data-element name="ფასი">
       <ng-template uiTemplate let-ingredient>
-        <p class="truncate">{{ ingredient.price || 0 }}₾</p>
+        <p class="truncate">{{ ingredient.price || 0 | number : "1.2-2" }}₾</p>
       </ng-template>
     </ui-data-element>
   </ui-responsive-data-view>

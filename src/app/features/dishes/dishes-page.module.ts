@@ -36,6 +36,7 @@ import { IngredientRecordComponent } from './ingredient-record/ingredient-record
         component: DishesPageComponent,
       },
     ]),
+
     UiTemplateDirective,
     UiResponsiveDataViewModule,
     ButtonModule,

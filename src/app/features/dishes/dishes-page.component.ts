@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {
   EntityModel,
+  EntityStockStatusEnum,
   EntityTypeEnum,
 } from '../../services/entity-management/entity-management.model';
 import { EntityManagementService } from '../../services/entity-management/entity-management.service';
@@ -17,6 +18,8 @@ export class DishesPageComponent {
   selectedDish!: Partial<EntityModel>;
 
   dishesDataSource?: UiPaginationDataSource;
+
+  entityStockStatus = EntityStockStatusEnum;
 
   constructor(
     private readonly _entityManagementService: EntityManagementService,

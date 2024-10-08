@@ -40,9 +40,9 @@
   }@else{
 
   <p class="font-primeng text-2xl font-bold mb-8">{{ dish.title }}</p>
-  <p class="font-primeng mb-2">ფასი: {{ dish.price }}₾</p>
+  <p class="font-primeng mb-2">ფასი: {{ dish.price | number : "1.2-2" }}₾</p>
   <p class="font-primeng mb-12">
-    ნედლეულის ხარჯი: {{ dish.ingredients_cost }}₾
+    ნედლეულის ხარჯი: {{ dish.ingredients_cost | number : "1.2-2" }}₾
   </p>
 
   }

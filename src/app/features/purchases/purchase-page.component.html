@@ -12,13 +12,13 @@
   >
     <ng-template uiTemplate="note">
       <p class="mb-2">
-        ჯამური თანხა : {{ purchasesDataSource.response.total_price }}₾
+        ჯამური თანხა : {{ purchasesDataSource.response?.total_price }}₾
       </p>
     </ng-template>
 
     <ng-template uiTemplate="filter">
       <div>
-        <div class="mb-2">
+        <div class="mb-4">
           <label for="quantity" class="pb-1 font-primeng">თარიღი -დან</label>
           <p-calendar
             name="date"

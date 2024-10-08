@@ -16,6 +16,7 @@ export interface IngredientRecord {
 export interface Dish extends EntityModel {
   ingredients?: IngredientRecord[];
   ingredients_cost: number;
+  stock_amount: number;
 }
 
 export enum EntityTypeEnum {
@@ -26,6 +27,12 @@ export enum EntityTypeEnum {
 export enum MeasurementTypeEnum {
   Unit = 'unit',
   Kg = 'kg',
+}
+
+export enum EntityStockStatusEnum {
+  Negative = 'negative',
+  Positive = 'positive',
+  zero = 'zero',
 }
 
 export const MeasurementTypes = [

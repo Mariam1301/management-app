@@ -29,6 +29,11 @@ export class WrapperComponent {
       path: 'purchases',
       icon: 'trending-up',
     },
+    {
+      title: 'წარმოება',
+      path: 'production',
+      icon: 'layers',
+    },
   ];
 
   toggleIsMenuOpen() {
