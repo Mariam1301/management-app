@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 export default class UiPaginationDataSource {
   data: any = [];
   filter: any = {};
-  pageSize = 15;
+  pageSize = 10;
   pageNumber = 1;
   totalCount = 0;
   totalPages = 0;
