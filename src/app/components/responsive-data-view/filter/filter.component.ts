@@ -14,5 +14,5 @@ export class FilterComponent {
   @Output()
   filterClicked = new EventEmitter();
 
-  isExpanded = true;
+  isExpanded = false;
 }

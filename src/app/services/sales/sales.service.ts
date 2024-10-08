@@ -40,7 +40,7 @@ export class SalesService {
   updateSale(sale: Sale) {
     return this._baseHttpService.put<unknown, Partial<Sale>>(
       `${this.entityName}/${sale.id}`,
-      { id: sale.id, title: sale.title, date: sale.date }
+      { id: sale.id, date: sale.date }
     );
   }
   deleteSale(id: number) {

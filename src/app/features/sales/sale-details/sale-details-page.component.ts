@@ -30,7 +30,6 @@ export class SaleDetailsPageComponent implements OnInit {
     this._route.data
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((data) => {
-        console.log(data);
         this.sale = data['details'];
       });
     this.fetchRecords();

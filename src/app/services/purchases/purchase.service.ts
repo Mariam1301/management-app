@@ -47,7 +47,7 @@ export class PurchasesService {
   updatePurchase(purchase: Purchase) {
     return this._baseHttpService.put<unknown, Partial<Purchase>>(
       `${this.entityName}/${purchase.id}`,
-      { id: purchase.id, title: purchase.title, date: purchase.date }
+      { id: purchase.id, date: purchase.date }
     );
   }
   deletePurchase(id: number) {
