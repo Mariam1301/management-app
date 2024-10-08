@@ -23,8 +23,8 @@ export class PurchasesPageComponent {
 
   ngOnInit(): void {
     this.purchasesDataSource = this._dsCreator.createWithPagination(
-      (pageNumber, pageSize) =>
-        this._purchasesService.getAllPurchases(pageNumber, pageSize)
+      (pageNumber, pageSize, filter) =>
+        this._purchasesService.getAllPurchases(pageNumber, pageSize, filter)
     );
   }
 

@@ -63,4 +63,9 @@ export default class UiPaginationDataSource {
       this.data = response.data;
     });
   }
+
+  clearFilter() {
+    this.filter = {};
+    this.fetchData();
+  }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../base-http/base-http.service';
-import { Purchase, PurchaseRecord } from './purchase.model';
+import { Purchase, PurchasePageFilter, PurchaseRecord } from './purchase.model';
+import { formatDateToISODate } from '../../utils/date-formating';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,23 @@ export class PurchasesService {
 
   constructor(private readonly _baseHttpService: BaseHttpService) {}
 
-  getAllPurchases(pageNumber: number, pageSize: number) {
+  getAllPurchases(
+    pageNumber: number,
+    pageSize: number,
+    filter: PurchasePageFilter
+  ) {
     return this._baseHttpService.get<Purchase[]>(
       `${this.entityName}`,
-      { page: pageNumber, per_page: pageSize },
+      {
+        page: pageNumber,
+        per_page: pageSize,
+        start_date: filter.start_date
+          ? formatDateToISODate(filter.start_date)
+          : undefined,
+        end_date: filter.end_date
+          ? formatDateToISODate(filter.end_date)
+          : undefined,
+      },
       {
         loaderId: 'purchases',
       }

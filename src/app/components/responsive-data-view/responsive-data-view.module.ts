@@ -10,9 +10,12 @@ import { UiConfirmationDirective } from '../confirmation/confirmation.directive'
 import { UiPaginatorComponent } from './paginator/paginator.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { UiLoadMoreButtonComponent } from './load-more/load-more-button.component';
+import { FilterComponent } from './filter/filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+    FilterComponent,
     UiResponsiveDataViewComponent,
     UiDataElement,
     UiPaginatorComponent,
@@ -27,6 +30,7 @@ import { UiLoadMoreButtonComponent } from './load-more/load-more-button.componen
     UiConfirmationDirective,
     PaginatorModule,
     ButtonModule,
+    FormsModule,
   ],
   exports: [UiResponsiveDataViewComponent, UiDataElement],
 })

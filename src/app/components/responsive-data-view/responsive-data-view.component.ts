@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   Component,
+  ContentChild,
   ContentChildren,
   DestroyRef,
   EventEmitter,
@@ -8,10 +9,13 @@ import {
   OnInit,
   Output,
   QueryList,
+  TemplateRef,
 } from '@angular/core';
 import { UiDataElement } from './data-element/data-element.component';
 import { LoaderService } from '../../services/loader/loader.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UiTemplateDirective } from '../template/ui-template.directive';
+import UiPaginationDataSource from '../data-source/pagination-data-source';
 
 @Component({
   selector: 'ui-responsive-data-view',
@@ -63,6 +67,11 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
   @ContentChildren(UiDataElement)
   contentChildren!: QueryList<UiDataElement>;
 
+  @ContentChild(UiTemplateDirective)
+  templateRef!: UiTemplateDirective;
+
+  filterTemplate!: TemplateRef<any>;
+
   columnList!: any[];
 
   isLoading = true;
@@ -86,11 +95,22 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
 
   ngAfterContentInit(): void {
     this.columnList = this.contentChildren.toArray();
+    if (this.templateRef?.name === 'filter') {
+      this.filterTemplate = this.templateRef.template;
+    }
   }
 
   onDeleteClick(row: any, index?: number) {
     this.emitDeleteIndex
       ? this.deleteClicked.emit(index)
       : this.deleteClicked.emit(row);
+  }
+
+  onFilterClick() {
+    this.dataSource.fetchData();
+  }
+
+  onClearClick() {
+    this.dataSource.clearFilter();
   }
 }

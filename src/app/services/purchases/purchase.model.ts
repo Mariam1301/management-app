@@ -15,3 +15,8 @@ export interface PurchaseRecord {
   price: number;
   accounting_id?: number;
 }
+
+export interface PurchasePageFilter {
+  start_date: string;
+  end_date: string;
+}

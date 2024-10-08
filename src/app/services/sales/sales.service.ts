@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../base-http/base-http.service';
-import { Sale, SaleRecord } from './sales.model';
+import { Sale, SalePageFilter, SaleRecord } from './sales.model';
+import { formatDateToISODate } from '../../utils/date-formating';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,19 @@ export class SalesService {
 
   constructor(private readonly _baseHttpService: BaseHttpService) {}
 
-  getAllSales(pageNumber: number, pageSize: number) {
+  getAllSales(pageNumber: number, pageSize: number, filter: SalePageFilter) {
     return this._baseHttpService.get<Sale[]>(
       `${this.entityName}`,
-      { page: pageNumber, per_page: pageSize },
+      {
+        page: pageNumber,
+        per_page: pageSize,
+        start_date: filter.start_date
+          ? formatDateToISODate(filter.start_date)
+          : undefined,
+        end_date: filter.end_date
+          ? formatDateToISODate(filter.end_date)
+          : undefined,
+      },
       {
         loaderId: 'sales',
       }

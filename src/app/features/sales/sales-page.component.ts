@@ -4,6 +4,7 @@ import { SalesService } from '../../services/sales/sales.service';
 import { Router } from '@angular/router';
 import UiDatasourceCreator from '../../components/data-source/data-source-creator';
 import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
+import { formatDateToISODate } from '../../utils/date-formating';
 
 @Component({
   selector: 'app-sales',
@@ -28,8 +29,8 @@ export class SalesPageComponent {
 
   ngOnInit(): void {
     this.salesDataSource = this._dsCreator.createWithPagination(
-      (pageNumber, pageSize) =>
-        this._salesService.getAllSales(pageNumber, pageSize)
+      (pageNumber, pageSize, filter) =>
+        this._salesService.getAllSales(pageNumber, pageSize, filter)
     );
   }
 
@@ -59,6 +60,10 @@ export class SalesPageComponent {
   }
 
   fetchSales() {
+    this.salesDataSource.fetchData();
+  }
+
+  onfilterclick() {
     this.salesDataSource.fetchData();
   }
 }

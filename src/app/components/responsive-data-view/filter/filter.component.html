@@ -1,0 +1,47 @@
+<div
+  class="w-full rounded my-5 border"
+  [ngClass]="{ 'border-transparent': !isExpanded }"
+>
+  <div class="w-full flex justify-end p-3">
+    <button
+      class="text-left flex group items-center gap-x-2 text-primeng-surface-700 hover:text-primeng-surface-900 font-primeng font-medium px-2 py-1 rounded-primeng transition-all duration-300"
+      (click)="isExpanded = !isExpanded"
+    >
+      ფილტრი
+
+      <div
+        class="p-1 group-hover:shadow-sm group-hover:bg-primeng-surface-0 border border-primeng-surface-border rounded-primeng transition-all duration-200"
+        routerLinkActive="bg-primeng-surface-0"
+      >
+        <ui-icon
+          [size]="12"
+          [name]="isExpanded ? 'chevron-up' : 'chevron-down'"
+        ></ui-icon>
+      </div>
+    </button>
+  </div>
+  @if(isExpanded){
+  <form #form="ngForm">
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-x-8 gap-y-4 px-5">
+      <ng-content></ng-content>
+    </div>
+  </form>
+  @if(showButtons){
+  <div
+    class="w-full px-3 flex items-center flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-5 pb-3 py-8"
+  >
+    <button
+      class="p-ripple flex justify-center items-center sm:w-fit w-full font-primeng p-element p-button p-component p-button-secondary p-button-text"
+      (click)="clearClicked.emit()"
+    >
+      გასუფთავება
+    </button>
+    <button
+      class="p-button sm:w-fit w-full justify-center font-primeng"
+      (click)="filterClicked.emit()"
+    >
+      გაფილტვრა
+    </button>
+  </div>
+  }}
+</div>

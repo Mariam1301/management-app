@@ -1,7 +1,11 @@
-<ng-content></ng-content> @if(title){
-<h1 class="font-primeng font-semibold text-xl mb-5">{{ title }}</h1>
-} @if(showAddButton){
-<div class="flex w-full justify-end mb-5 mt-12 sm:mt-0">
+<ng-content></ng-content>
+<div
+  class="flex sm:items-center justify-between flex-col sm:flex-row items-start mb-8"
+>
+  @if(title){
+  <h1 class="font-primeng font-semibold text-xl mb-5 sm:mb-0">{{ title }}</h1>
+  } @if(showAddButton){
+  <!-- <div class="flex w-full justify-end mb-5 mt-12 sm:mt-0"> -->
   <button
     class="p-button w-full sm:w-fit justify-center flex gap-2 items-center"
     (click)="addButtonClicked.emit()"
@@ -9,7 +13,18 @@
     <ui-icon name="plus" [size]="18" color="pointer"></ui-icon>
     <p class="font-primeng">დამატება</p>
   </button>
+  <!-- </div> -->
+  }
 </div>
+
+@if(filterTemplate){
+<data-view-filter
+  [showButtons]="true"
+  (filterClicked)="onFilterClick()"
+  (clearClicked)="onClearClick()"
+>
+  <ng-container *ngTemplateOutlet="filterTemplate"></ng-container>
+</data-view-filter>
 } @if(isLoading&&loaderId){
 <div class="hidden sm:block">
   <p-skeleton height="2rem" styleClass="mb-2" />

@@ -16,4 +16,9 @@ export interface SaleRecord {
   accounting_id?: number;
 }
 
+export interface SalePageFilter {
+  start_date: string;
+  end_date: string;
+}
+
 export interface AddSaleInterface {}
