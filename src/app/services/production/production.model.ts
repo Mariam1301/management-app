@@ -8,7 +8,7 @@ export interface ProductionPageFilter {
 
 export interface Production {
   amount: number;
-  date: string;
+  date: string | Date;
   entity_id: number;
   entity: EntityModel;
   id: number;

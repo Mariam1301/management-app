@@ -10,7 +10,7 @@
       placeholder="აირჩიე პროდუქტი"
       class="w-full"
       [options]="entityOptions"
-      [(ngModel)]="productionRecord.entity_id"
+      [(ngModel)]="_productionRecord.entity_id"
     />
   </div>
   <div class="flex flex-col pb-5">
@@ -23,7 +23,7 @@
       type="number"
       class="w-full"
       aria-describedby="amount-help"
-      [(ngModel)]="productionRecord.amount"
+      [(ngModel)]="_productionRecord.amount"
     />
   </div>
   <label for="quantity" class="pb-1 font-primeng">თარიღი</label>
@@ -33,7 +33,7 @@
     dateFormat="yy-mm-dd"
     hourFormat="24"
     class="mb-5"
-    [(ngModel)]="productionRecord.date"
+    [(ngModel)]="_productionRecord.date"
   />
 
   <ui-dialog-actions

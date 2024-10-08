@@ -10,12 +10,17 @@ import { map } from 'rxjs';
 })
 export class ProductionRecordComponent {
   @Input()
-  productionRecord: Partial<Production> = {};
+  set productionRecord(value: Partial<Production>) {
+    value &&
+      (this._productionRecord = { ...value, date: value.date || new Date() });
+  }
 
   @Output()
   saveClicked = new EventEmitter<Production>();
 
   entityOptions: EntityModel[] = [];
+
+  _productionRecord: Partial<Production> = {};
 
   constructor(
     private readonly _entityManagementService: EntityManagementService
