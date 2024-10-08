@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../base-http/base-http.service';
-import { Dish, EntityModel } from './entity-management.model';
+import {
+  Dish,
+  EntityFilterModel,
+  EntityModel,
+} from './entity-management.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,18 +22,26 @@ export class EntityManagementService {
     );
   }
 
-  getAllIngredients(pageNumber?: number, pageSize?: number) {
+  getAllIngredients(
+    pageNumber?: number,
+    pageSize?: number,
+    filter?: EntityFilterModel
+  ) {
     return this._baseHttpService.get<{ data: EntityModel[] }>(
       `${this.entityName}/ingredients`,
-      { page: pageNumber, per_page: pageSize },
+      { page: pageNumber, per_page: pageSize, ...filter },
       { loaderId: 'ingredient' }
     );
   }
 
-  getDishes(pageNumber?: number, pageSize?: number) {
+  getDishes(
+    pageNumber?: number,
+    pageSize?: number,
+    filter?: EntityFilterModel
+  ) {
     return this._baseHttpService.get<{ data: EntityModel[] }>(
       `${this.entityName}/dishes`,
-      { page: pageNumber, per_page: pageSize },
+      { page: pageNumber, per_page: pageSize, ...filter },
       { loaderId: 'dishes' }
     );
   }

@@ -10,6 +10,21 @@
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"
   >
+    <ng-template uiTemplate="filter">
+      <div class="flex flex-col">
+        <label class="mb-1">პროდუქტი</label>
+        <input
+          pInputText
+          name="product"
+          id="keyword"
+          type="text"
+          placeholder="შეიყვანეთ დასახელება"
+          aria-describedby="keyword-search"
+          [(ngModel)]="dishesDataSource.filter.keyword"
+        />
+      </div>
+    </ng-template>
+
     <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
 
     <ui-data-element name="ფასი">

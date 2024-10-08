@@ -11,44 +11,45 @@
     (rowClicked)="onRowClick($event)"
   >
     <ng-template uiTemplate="filter">
-      <div>
-        <div class="mb-4">
-          <label for="quantity">თარიღი -დან</label>
-          <p-calendar
-            name="date"
-            appendTo="body"
-            dateFormat="yy-mm-dd"
-            hourFormat="24"
-            [showClear]="true"
-            [maxDate]="productionDataSource.filter.end_date"
-            [(ngModel)]="productionDataSource.filter.start_date"
-          />
-        </div>
+      <div class="flex flex-col gap-2">
         <div>
-          <label for="quantity">თარიღი -მდე</label>
-          <p-calendar
-            name="date"
-            appendTo="body"
-            dateFormat="yy-mm-dd"
-            hourFormat="24"
-            [showClear]="true"
-            [minDate]="productionDataSource.filter.start_date"
-            [(ngModel)]="productionDataSource.filter.end_date"
-          />
+          <label class="mb-1">თარიღი</label>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+            <p-calendar
+              name="date"
+              appendTo="body"
+              dateFormat="yy-mm-dd"
+              hourFormat="24"
+              placeholder="-დან"
+              [showClear]="true"
+              [maxDate]="productionDataSource.filter.end_date"
+              [(ngModel)]="productionDataSource.filter.start_date"
+            />
+            <p-calendar
+              name="date"
+              appendTo="body"
+              dateFormat="yy-mm-dd"
+              hourFormat="24"
+              placeholder="-მდე"
+              [showClear]="true"
+              [minDate]="productionDataSource.filter.start_date"
+              [(ngModel)]="productionDataSource.filter.end_date"
+            />
+          </div>
         </div>
       </div>
-      <div>
-        <div class="flex flex-col">
-          <label for="product">პროდუქტი</label>
-          <input
-            pInputText
-            name="product"
-            id="keyword"
-            type="text"
-            aria-describedby="keyword-search"
-            [(ngModel)]="productionDataSource.filter.keyword"
-          />
-        </div>
+      <div class="flex flex-col">
+        <label class="mb-1">პროდუქტი</label>
+
+        <input
+          pInputText
+          name="product"
+          id="keyword"
+          type="text"
+          placeholder="პროდუქტის დასახელება"
+          aria-describedby="keyword-search"
+          [(ngModel)]="productionDataSource.filter.keyword"
+        />
       </div>
     </ng-template>
     <ui-data-element name="პროდუქტი">

@@ -17,7 +17,7 @@ export class DishesPageComponent {
 
   selectedDish!: Partial<EntityModel>;
 
-  dishesDataSource?: UiPaginationDataSource;
+  dishesDataSource!: UiPaginationDataSource;
 
   entityStockStatus = EntityStockStatusEnum;
 
@@ -29,8 +29,8 @@ export class DishesPageComponent {
 
   ngOnInit(): void {
     this.dishesDataSource = this._dsCreator.createWithPagination(
-      (pageNumber, pageSize) =>
-        this._entityManagementService.getDishes(pageNumber, pageSize)
+      (pageNumber, pageSize, filter) =>
+        this._entityManagementService.getDishes(pageNumber, pageSize, filter)
     );
   }
 

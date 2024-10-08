@@ -34,6 +34,6 @@ export class ProductionRecordComponent {
   }
 
   onSaveClick() {
-    this.saveClicked.emit(this.productionRecord as Production);
+    this.saveClicked.emit(this._productionRecord as Production);
   }
 }

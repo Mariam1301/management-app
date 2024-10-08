@@ -10,17 +10,38 @@
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"
   >
+    <ng-template uiTemplate="filter">
+      <div class="flex flex-col">
+        <label class="mb-1">ნედლეული</label>
+        <input
+          pInputText
+          name="ingredient"
+          id="keyword"
+          type="text"
+          placeholder="შეიყვანეთ დასახელება"
+          aria-describedby="keyword-search"
+          [(ngModel)]="ingredientsDataSource.filter.keyword"
+        />
+      </div>
+    </ng-template>
     <ui-data-element name="დასახელება" valueField="title"></ui-data-element>
-    <ui-data-element name="ერთეული">
-      <ng-template uiTemplate let-ingredient>
-        <p class="truncate">
-          {{ ingredient.measurement_type | measurementType }}
-        </p>
-      </ng-template>
-    </ui-data-element>
     <ui-data-element name="ფასი">
       <ng-template uiTemplate let-ingredient>
         <p class="truncate">{{ ingredient.price || 0 | number : "1.2-2" }}₾</p>
+      </ng-template>
+    </ui-data-element>
+    <ui-data-element name="მარაგი">
+      <ng-template uiTemplate let-ingredient>
+        <p
+          class="truncate"
+          [ngClass]="{
+            'text-red-500':
+              ingredient.stock_status === entityStockStatus.Negative
+          }"
+        >
+          {{ ingredient.stock_amount }}
+          {{ ingredient.measurement_type | measurementType }}
+        </p>
       </ng-template>
     </ui-data-element>
   </ui-responsive-data-view>

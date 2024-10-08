@@ -3,6 +3,7 @@ import { EntityManagementService } from '../../services/entity-management/entity
 import {
   EntityTypeEnum,
   EntityModel,
+  EntityStockStatusEnum,
 } from '../../services/entity-management/entity-management.model';
 import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
 import UiDatasourceCreator from '../../components/data-source/data-source-creator';
@@ -16,6 +17,9 @@ export class IngredientsPageComponent implements OnInit {
   selectedIngredient!: Partial<EntityModel>;
 
   ingredientsDataSource!: UiPaginationDataSource;
+
+  entityStockStatus = EntityStockStatusEnum;
+
   constructor(
     private readonly _entityManagementService: EntityManagementService,
     private readonly _dsCreator: UiDatasourceCreator
@@ -23,8 +27,12 @@ export class IngredientsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingredientsDataSource = this._dsCreator.createWithPagination(
-      (pageNumber, pageSize) =>
-        this._entityManagementService.getAllIngredients(pageNumber, pageSize)
+      (pageNumber, pageSize, filter) =>
+        this._entityManagementService.getAllIngredients(
+          pageNumber,
+          pageSize,
+          filter
+        )
     );
   }
 

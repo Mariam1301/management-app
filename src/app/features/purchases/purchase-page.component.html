@@ -18,27 +18,24 @@
 
     <ng-template uiTemplate="filter">
       <div>
-        <div class="mb-4">
-          <label for="quantity" class="pb-1 font-primeng">თარიღი -დან</label>
+        <label class="mb-1">თარიღი</label>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
           <p-calendar
             name="date"
             appendTo="body"
             dateFormat="yy-mm-dd"
             hourFormat="24"
-            class="mb-5"
+            placeholder="-დან"
             [showClear]="true"
             [maxDate]="purchasesDataSource.filter.end_date"
             [(ngModel)]="purchasesDataSource.filter.start_date"
           />
-        </div>
-        <div>
-          <label for="quantity" class="pb-1 font-primeng">თარიღი -მდე</label>
           <p-calendar
             name="date"
             appendTo="body"
             dateFormat="yy-mm-dd"
             hourFormat="24"
-            class="mb-5"
+            placeholder="-მდე"
             [showClear]="true"
             [minDate]="purchasesDataSource.filter.start_date"
             [(ngModel)]="purchasesDataSource.filter.end_date"

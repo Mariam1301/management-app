@@ -39,7 +39,7 @@ export class ProductionPageComponent implements OnInit {
 
   onSaveClick(production: Production) {
     this.isDialogVisible = false;
-    production.id
+    production?.id
       ? this._productionService
           .updateProductionRecord(production)
           .subscribe(() => this.productionDataSource.refresh())

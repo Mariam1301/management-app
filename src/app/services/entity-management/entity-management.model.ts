@@ -4,6 +4,7 @@ export interface EntityModel {
   type: EntityTypeEnum;
   measurement_type: MeasurementTypeEnum;
   measurement_amount: number;
+  stock_amount: number;
   price?: number;
 }
 
@@ -11,12 +12,17 @@ export interface IngredientRecord {
   id: number;
   measurement_type: MeasurementTypeEnum;
   measurement_amount: number;
+  stock_status?: EntityStockStatusEnum;
 }
 
 export interface Dish extends EntityModel {
   ingredients?: IngredientRecord[];
   ingredients_cost: number;
-  stock_amount: number;
+  status: EntityStockStatusEnum;
+}
+
+export interface EntityFilterModel {
+  keyword: string;
 }
 
 export enum EntityTypeEnum {
