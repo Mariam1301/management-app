@@ -9,6 +9,8 @@ export default class UiPaginationDataSource {
   totalPages = 0;
   filterCount = 0;
 
+  response: any;
+
   loadMore = window.innerWidth < 640;
 
   constructor(
@@ -27,6 +29,7 @@ export default class UiPaginationDataSource {
   fetchData() {
     this.fetch(this.pageNumber, this.pageSize, this.filter).subscribe(
       (response) => {
+        this.response = response;
         this.data = response?.data;
         this.totalCount = response?.total;
       }

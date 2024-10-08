@@ -4,7 +4,6 @@ import { SalesService } from '../../services/sales/sales.service';
 import { Router } from '@angular/router';
 import UiDatasourceCreator from '../../components/data-source/data-source-creator';
 import UiPaginationDataSource from '../../components/data-source/pagination-data-source';
-import { formatDateToISODate } from '../../utils/date-formating';
 
 @Component({
   selector: 'app-sales',

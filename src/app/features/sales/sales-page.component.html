@@ -10,6 +10,13 @@
     (deleteClicked)="onDeleteClick($event)"
     (rowClicked)="onRowClick($event)"
   >
+    <ng-template uiTemplate="note">
+      <p class="mb-2">
+        ჯამური თანხა : {{ salesDataSource.response.total_price }}₾
+      </p>
+      <p>ჯამური რაოდენობა : {{ salesDataSource.response.total_amount }}</p>
+    </ng-template>
+
     <ng-template uiTemplate="filter">
       <div>
         <div class="mb-2">

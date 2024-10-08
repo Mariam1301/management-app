@@ -67,10 +67,12 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
   @ContentChildren(UiDataElement)
   contentChildren!: QueryList<UiDataElement>;
 
-  @ContentChild(UiTemplateDirective)
-  templateRef!: UiTemplateDirective;
+  @ContentChildren(UiTemplateDirective)
+  templateRefs!: QueryList<UiTemplateDirective>;
 
   filterTemplate!: TemplateRef<any>;
+
+  noteTemplate!: TemplateRef<any>;
 
   columnList!: any[];
 
@@ -95,8 +97,13 @@ export class UiResponsiveDataViewComponent implements AfterContentInit, OnInit {
 
   ngAfterContentInit(): void {
     this.columnList = this.contentChildren.toArray();
-    if (this.templateRef?.name === 'filter') {
-      this.filterTemplate = this.templateRef.template;
+    for (let template of this.templateRefs.toArray()) {
+      if (template.name === 'note') {
+        this.noteTemplate = template.template;
+      }
+      if (template.name === 'filter') {
+        this.filterTemplate = template.template;
+      }
     }
   }
 

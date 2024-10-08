@@ -25,6 +25,12 @@
 >
   <ng-container *ngTemplateOutlet="filterTemplate"></ng-container>
 </data-view-filter>
+} @if(noteTemplate){
+<div
+  class="w-full bg-primeng-surface-0 px-3 sm:border-b-0 py-5 border-dashed border"
+>
+  <ng-container *ngTemplateOutlet="noteTemplate"></ng-container>
+</div>
 } @if(isLoading&&loaderId){
 <div class="hidden sm:block">
   <p-skeleton height="2rem" styleClass="mb-2" />
